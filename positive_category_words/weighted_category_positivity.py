@@ -31,6 +31,11 @@ def avg_and_total(iterable):
 # data is much more sparse
 MINIMUM_OCCURENCES = 50
 
+# Require reviews from AT LEAST this many distinct businesses before
+# we include a word (prevents very popular restaurant names from
+# showing up in the list)
+MINIMUM_BUSINESSES = 3
+
 class WeightedPositiveWords(MRJob):
 	"""Find the most positive words in the dataset."""
 
@@ -65,10 +70,10 @@ class WeightedPositiveWords(MRJob):
 
 		for category in categories:
 			for review_positivity in reviews:
-				yield category, review_positivity
+				yield category, (business_id, review_positivity)
 
-	def review_mapper(self, category, review_positivity):
-		review, positivity = review_positivity
+	def review_mapper(self, category, biz_review_positivity):
+		biz_id, (review, positivity) = biz_review_positivity
 
 		# normalize words by lowercasing and dropping non-alpha
 		# characters
@@ -78,10 +83,20 @@ class WeightedPositiveWords(MRJob):
 		words = set(norm(word) for word in review.split())
 
 		for word in words:
-			yield (category, word), positivity
+			yield (category, word), (biz_id, positivity)
 
-	def positivity_reducer(self, category_word, positivities):
+	def positivity_reducer(self, category_word, biz_positivities):
 		category, word = category_word
+
+		businesses = set()
+		positivities = []
+		for biz_id, positivity in biz_positivities:
+			businesses.add(biz_id)
+			positivities.append(positivity)
+
+		# don't include words that only show up for a few businesses
+		if len(businesses) < MINIMUM_BUSINESSES:
+			return
 
 		avg, total = avg_and_total(positivities)
 
