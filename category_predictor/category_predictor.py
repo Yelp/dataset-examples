@@ -34,10 +34,8 @@ def words(text):
 		# characters
 		normed = re.sub('[^a-z]', '', word.lower())
 
-		if not normed:
-			continue
-
-		yield normed
+		if normed:
+			yield normed
 
 class CategoryPredictor(MRJob):
 	"""A very simple category predictor. Trains on review data and
@@ -73,14 +71,14 @@ class CategoryPredictor(MRJob):
 			else:
 				categories = data
 
-		# we either didn't find a matching business, or this biz
+		# We either didn't find a matching business, or this biz
 		# doesn't have any categories. In either case, we can drop
 		# these reviews.
 		if not categories:
 			return
 
 		# Yield out review counts in the same format as the
-		# tokenize_reviews_mapper. We'll special case the '__all__' key in
+		# tokenize_reviews_mapper. We'll special case the 'all' key in
 		# that method, but afterwards it will be treated the same.
 		yield 'all', dict((cat, len(reviews)) for cat in categories)
 
@@ -134,14 +132,17 @@ class CategoryPredictor(MRJob):
 		if not filtered_counts:
 			return
 
-		# assign a small mass to unknown tokens
+		# Assign a small mass to unknown tokens - check out
+		# http://en.wikipedia.org/wiki/Laplacian_smoothing for background.
 		filtered_counts['UNK'] = 0.01
 
 		# emit the result
 		yield category, filtered_counts
 
 	def steps(self):
-		return [self.mr(),
+		return [self.mr(), # Split apart the dataset into multiple
+				# chunks. In regular hadoop-land you could change the
+				# splitter. This is normally < 30 seconds of work.
 				self.mr(self.review_category_mapper,
 						self.add_categories_to_reviews_reducer),
 				self.mr(self.tokenize_reviews_mapper,

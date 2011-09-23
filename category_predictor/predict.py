@@ -12,6 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Use the output from the CategoryPredictor MRJob to predict the
+category of text. This uses a simple naive-bayes model - see
+http://en.wikipedia.org/wiki/Naive_Bayes_classifier for more details.
+"""
+
+from __future__ import with_statement
+
 import math
 import sys
 
@@ -22,7 +29,10 @@ class ReviewCategoryClassifier(object):
 
 	@classmethod
 	def load_data(cls, input_file):
-		"""Read the output of the CategoryPredictor mrjob."""
+		"""Read the output of the CategoryPredictor mrjob, returning
+		total category counts (count of # of reviews for each
+		category), and counts of words for each category.
+		"""
 
 		job = category_predictor.CategoryPredictor()
 
@@ -60,11 +70,19 @@ class ReviewCategoryClassifier(object):
 
 		# filter out categories which have no words
 		seen_categories = set(word_counts)
-		seen_category_counts = dict((cat, count) for cat, count in category_counts.iteritems() if cat in seen_categories)
+		seen_category_counts = dict((cat, count) for cat, count in category_counts.iteritems() \
+										if cat in seen_categories)
 		self.category_prob = self.normalize_counts(seen_category_counts)
 
 	def classify(self, text):
-		"""Classify some text."""
+		"""Classify some text using the result of the
+		CategoryPredictor MRJob. We use a basic naive-bayes model,
+		eg, argmax_category p(category) * p(words | category) ==
+		p(category) * pi_{i \in words} p(word_i | category).
+
+		p(category) is stored in self.category_prob, p(word | category
+		is in self.word_given_cat_prob.
+		"""
 		# start with prob(category)
 		lg_scores = self.category_prob.copy()
 
@@ -87,7 +105,7 @@ class ReviewCategoryClassifier(object):
 		scores = dict((cat, math.exp(score)) for cat, score in lg_scores.iteritems())
 
 		# normalize the scores again - this isnt' strictly necessary,
-		# but it's nice to report proabilities with our guesses
+		# but it's nice to report probabilities with our guesses
 		total = sum(scores.itervalues())
 		return dict((cat, prob / total) for cat, prob in scores.iteritems())
 

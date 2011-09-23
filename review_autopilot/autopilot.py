@@ -13,8 +13,9 @@
 # limitations under the License.
 
 """Gather the data necessary to generate reviews using a simple markov
-model. We gather word-next word counts for each category, eliminating
-rare pairs.
+model (see http://en.wikipedia.org/wiki/Markov_chain for more
+details). We gather word-next word counts for each category,
+eliminating rare pairs.
 """
 
 import re
@@ -43,7 +44,7 @@ def words(text):
 		yield normed
 
 def word_pairs(text):
-	"""Given some text, yield out pairs of words."""
+	"""Given some text, yield out pairs of words (eg bigrams)."""
 	last_word = None
 
 	for word in words(text):
@@ -113,7 +114,9 @@ class ReviewAutoPilot(MRJob):
 			follow_counts[follow_word] = follow_counts.get(follow_word, 0) + count
 
 		total_transitions = float(sum(follow_counts.itervalues()))
-		thresholded_follow_counts = dict((word, count) for word, count in follow_counts.iteritems() if count > MINIMUM_PAIR_COUNT and count / total_transitions > MINIMUM_FOLLOW_PERCENTAGE)
+
+		include_word = lambda count: count > MINIMUM_PAIR_COUNT and count / total_transitions > MINIMUM_FOLLOW_PERCENTAGE
+		thresholded_follow_counts = dict((word, count) for word, count in follow_counts.iteritems() if include_word(count))
 
 		# filter out transitions where the transition has either
 		# occurred a minimum number of times, or does not make up a

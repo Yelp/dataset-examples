@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import with_statement
+
 import random
 import sys
 
@@ -24,7 +26,20 @@ class ReviewMarkovGenerator(object):
 	
 	@classmethod
 	def load_data(cls, input_file):
-		"""Read the output of the ReviewAutoPilot mrjob."""
+		"""Read the output of the ReviewAutoPilot mrjob, returning a
+		transition distribution. The transition distribution is a
+		dictionary with category keys. Each category key points to
+		another dictionary, which contains word keys, which contain
+		another set of dictionaries, which contain the probability of
+		transitioning to the the next word.
+
+		Here's an example:
+
+		category_transitions = {'Food': {'hot': {'dog': 1.0}}}
+
+		This means that for the category Food, the word 'hot' has a
+		100% probability of being followed by the word 'dog'.
+		"""
 		job = autopilot.ReviewAutoPilot()
 
 		category_transitions = {}
@@ -39,6 +54,9 @@ class ReviewMarkovGenerator(object):
 
 	@classmethod
 	def sample(cls, distribution):
+		"""Sample from a dictionary containing a probability
+		distribution.
+		"""
 		guess = random.random()
 
 		for word, prob in distribution.iteritems():
@@ -47,7 +65,12 @@ class ReviewMarkovGenerator(object):
 
 			guess -= prob
 
-		assert False, "We shouldn't have made it here!"
+		# random.random() returns a value between 0 and 1. The values
+		# of distribution are assumed to sum to 1 (since distribution
+		# is a probability distribution), so random.random() -
+		# sum(values) == 0. If this is not the case, then distribution
+		# is not a valid distribution.
+		assert False, "distribution is not a valid probability distribution!"
 
 	def __init__(self, input_file):
 		"""input_file: the output of the ReviewAutopilot job."""
@@ -56,7 +79,7 @@ class ReviewMarkovGenerator(object):
 	def complete(self, category, text):
 		"""Complete some text."""
 		if category not in self.category_transitions:
-			raise Exception('Unknown category (invalid or not enough data): %s' % category)
+			raise KeyError('Unknown category (invalid or not enough data): %s' % category)
 
 		words = list(autopilot.words(text))
 

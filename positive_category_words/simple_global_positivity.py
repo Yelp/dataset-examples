@@ -53,7 +53,9 @@ class PositiveWords(MRJob):
 
 	def positivity_reducer(self, word, ratings):
 		"""Emit average star rating, word in a format we can easily
-		sort."""
+		sort with the unix sort command: 
+		[star average * 100, total count], word.
+		"""
 		avg, total = avg_and_total(ratings)
 
 		if total < MINIMUM_OCCURENCES:
@@ -62,7 +64,10 @@ class PositiveWords(MRJob):
 		yield (int(avg * 100), total), word
 
 	def steps(self):
-		return [self.mr(), self.mr(self.review_mapper, self.positivity_reducer)]
+		return [self.mr(), # Split apart the dataset into multiple
+				# chunks. In regular hadoop-land you could change the
+				# splitter. This is normally < 30 seconds of work.
+				self.mr(self.review_mapper, self.positivity_reducer)]
 
 
 if __name__ == "__main__":

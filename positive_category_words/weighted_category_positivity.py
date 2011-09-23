@@ -54,7 +54,9 @@ class WeightedPositiveWords(MRJob):
 				yield data['business_id'], ('categories', data['categories'])
 
 	def category_join_reducer(self, business_id, reviews_or_categories):
-		"""Emit category-word combinations."""
+		"""Take in business_id, ((review text and rating) or category information), emit
+		category, (biz_id, (review, rating)).
+		"""
 		categories = None
 		reviews = []
 
@@ -73,6 +75,11 @@ class WeightedPositiveWords(MRJob):
 				yield category, (business_id, review_positivity)
 
 	def review_mapper(self, category, biz_review_positivity):
+		"""Take in category, (biz_id, (review, rating)) and split the
+		review into individual unique words. Emit 
+		(category, word), (biz_id, rating), which will then be used to
+		gather info about each category / word pair.
+		"""
 		biz_id, (review, positivity) = biz_review_positivity
 
 		# normalize words by lowercasing and dropping non-alpha
@@ -86,6 +93,14 @@ class WeightedPositiveWords(MRJob):
 			yield (category, word), (biz_id, positivity)
 
 	def positivity_reducer(self, category_word, biz_positivities):
+		"""Read (category, word), (biz_id, positivity), and compute
+		the average positivity for the category-word pair. Skip words
+		that don't occur frequently enough or for not enough unique
+		businesses.
+
+		Emits rating, (category, # reviews with word, word).
+		"""
+
 		category, word = category_word
 
 		businesses = set()

@@ -3,12 +3,12 @@ Yelp's Academic Dataset Examples
 
 We're providing three examples for use with the dataset available at
 [http://www.yelp.com/academic_dataset]. They all depend on
-[mrjob][https://github.com/Yelp/mrjob] and python 2.6.
+[mrjob][https://github.com/Yelp/mrjob] and python 2.5 or later.
 
 Samples
 ------------
 
- - category\_predictor: Given some text, predict likely
+ - `category_predictor`: Given some text, predict likely
    categories. For example:
 
     python category_predictor/predict.py category_predictor.json "bacon donut"
@@ -18,14 +18,14 @@ Samples
     > Category: "Basque" - 0.02% chance
     > Category: "Spanish" - 0.02% chance
 
- - review\_autopilot: Use a markov chain to finish a review. For
+ - `review_autopilot`: Use a markov chain to finish a review. For
    example:
 
 	python review_autopilot/generate.py Food 'They have the best'
 	> They have the best coffee is good food was delicious cookies and
 	> a few friends i think they make this
 
- - positive\_category\_words: See the Yelp engineering blog for
+ - `positive_category_words`: See the Yelp engineering blog for
    details about this example. In short, it generates positivity
    scores for words either globally or per-category.
 
@@ -57,13 +57,13 @@ emr usage, if you haven't already).
 Create a simple mrjob.conf file, like this:
 
     runners:
-	  emr:
-	    aws_access_key_id: YOUR_ACCESS_KEY
-		aws_secret_access_key: YOUR_SECRET_KEY
+      emr:
+        aws_access_key_id: YOUR_ACCESS_KEY
+        aws_secret_access_key: YOUR_SECRET_KEY
 
 Now that that's done, you can run the autopilot script on EMR.
 
-    # WARNING: this will cost you roughly $2 an hour
+    # WARNING: this will cost you roughly $2 and take 10-20 minutes
 	python review_autopilot/autopilot.py --num-ec2-instances 10 --ec2-instance-type c1.medium -v --runner emr yelp_academic_dataset.json
 
 
