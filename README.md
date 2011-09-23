@@ -2,32 +2,31 @@ Yelp's Academic Dataset Examples
 ================================
 
 We're providing three examples for use with the dataset available at
-[http://www.yelp.com/academic_dataset]. They all depend on
-[mrjob][https://github.com/Yelp/mrjob] and python 2.5 or later.
+[http://www.yelp.com/academic_dataset](http://www.yelp.com/academic_dataset). They all depend on
+[mrjob](https://github.com/Yelp/mrjob) and python 2.5 or later.
 
 Samples
 ------------
 
- - `category_predictor`: Given some text, predict likely
-   categories. For example:
+`category_predictor`: Given some text, predict likely categories. For example:
 
     python category_predictor/predict.py category_predictor.json "bacon donut"
-    > Category: "Food" - 82.66% chance
-    > Category: "Restaurants" - 16.99% chance
-    > Category: "Donuts" - 0.12% chance
-    > Category: "Basque" - 0.02% chance
-    > Category: "Spanish" - 0.02% chance
+    Category: "Food" - 82.66% chance
+    Category: "Restaurants" - 16.99% chance
+    Category: "Donuts" - 0.12% chance
+    Category: "Basque" - 0.02% chance
+    Category: "Spanish" - 0.02% chance
 
- - `review_autopilot`: Use a markov chain to finish a review. For
-   example:
+`review_autopilot`: Use a markov chain to finish a review. For
+example:
 
 	python review_autopilot/generate.py Food 'They have the best'
-	> They have the best coffee is good food was delicious cookies and
-	> a few friends i think they make this
+	They have the best coffee is good food was delicious cookies and
+	a few friends i think they make this
 
- - `positive_category_words`: See the Yelp engineering blog for
-   details about this example. In short, it generates positivity
-   scores for words either globally or per-category.
+`positive_category_words`: See the Yelp engineering blog for
+details about this example. In short, it generates positivity
+scores for words either globally or per-category.
 
 Basic set-up
 ------------
@@ -49,8 +48,8 @@ Local mode couldn't be easier:
 Waiting a long time is kind of lame, no? Let's try the same thing
 using EMR.
 
-First off, you'll need an aws\_access\_key and an
-aws\_secret\_access\_key. You can get these from the AWS console
+First off, you'll need an `aws_access_key` and an
+`aws_secret_access_key`. You can get these from the AWS console
 (you'll need to sign up for an AWS developer account and enable s3 /
 emr usage, if you haven't already).
 
