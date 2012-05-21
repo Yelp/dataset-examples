@@ -43,6 +43,14 @@ class TestReviewAutoPilotCase(TestCase):
 		VALUES = (('business', {'categories': 'Food'}), ('review', 'Some text here'))
 		BUSINESS_ID= 'Yelp'
 		self.assertEqual(job.join_reviews_with_categories_reducer(BUSINESS_ID, VALUES).next(), ('Food', 'Some text here'))
+	def test_split_mapper(self):
+		"""Tests split_mapper reducer in autopilot
+		"""
+		job = ReviewAutoPilot()
+		CATEGORY = "Food"
+		VALUE = "This is a test"
+		TEST_RETURN = (('is', 'F'), ('a', 1)) 
+		self.assertEqual(job.review_split_mapper(CATEGORY, VALUE).next(), TEST_RETURN)
 
 
 if __name__ == '__main__':
