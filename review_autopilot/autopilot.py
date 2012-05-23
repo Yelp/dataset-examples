@@ -21,6 +21,7 @@ eliminating rare pairs.
 import re
 
 from mrjob.job import MRJob
+
 # Chance that the review will end after any given word.
 END_OF_REVIEW_RATE = 0.01
 
@@ -79,9 +80,11 @@ class ReviewAutoPilot(MRJob):
 				categories = data['categories']
 			else:
 				reviews.append(data)
+
 		# don't bother with these businesses
 		if not categories:
 			return
+
 		for review in reviews:
 			yield categories, review
 
@@ -111,6 +114,7 @@ class ReviewAutoPilot(MRJob):
 			follow_counts[follow_word] = follow_counts.get(follow_word, 0) + count
 
 		total_transitions = float(sum(follow_counts.itervalues()))
+
 		include_word = lambda count: count > MINIMUM_PAIR_COUNT and count / total_transitions > MINIMUM_FOLLOW_PERCENTAGE
 		thresholded_follow_counts = dict((word, count) for word, count in follow_counts.iteritems() if include_word(count))
 
@@ -119,8 +123,10 @@ class ReviewAutoPilot(MRJob):
 		# minimum percentage of outgoing transitions.
 		if not thresholded_follow_counts:
 			return
+
 		# put a small weight on <end>, which means 'end of review'.
-		thresholded_follow_counts['<end>'] = thresholded_follow_counts.get('<end>', 0.0) + END_OF_REVIEW_RATE * float(sum(thresholded_follow_counts.itervalues()))
+		thresholded_follow_counts['<end>'] = thresholded_follow_counts.get('<end>', 0.0) 
+		thresholded_follow_counts['<end>'] += END_OF_REVIEW_RATE * float(sum(thresholded_follow_counts.itervalues()))
 
 		# re-normalize the remaining transition weights.
 		new_total = float(sum(thresholded_follow_counts.itervalues()))
