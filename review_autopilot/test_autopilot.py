@@ -45,6 +45,7 @@ foofoo yelp foo yar foo foo bar bar dar"'
 		VALUES = (('business', {'categories': 'Food'}), ('review', 'Some text here'))
 		BUSINESS_ID= 'Yelp'
 		self.assertEqual(job.join_reviews_with_categories_reducer(BUSINESS_ID, VALUES).next(), ('Food', 'Some text here'))
+
 	def test_split_mapper(self):
 		"""Tests split_mapper reducer in autopilot"""
 		job = ReviewAutoPilot()
