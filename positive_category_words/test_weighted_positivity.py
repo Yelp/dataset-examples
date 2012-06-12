@@ -10,7 +10,7 @@ from weighted_category_positivity import WeightedPositiveWords
 COMPANY = u'Company'
 REVIEW_TEMPLATE = '{"type":"review", "stars":3, "text":"%s",\
 "business_id":"%s"}\n'
-BUSINESS_TEMPLATE = '{"type":"business", "categories":["%s"], \
+BUSINESS_TEMPLATE = '{"type":"business", "categories":["Company"], \
 "business_id":"%s"}\n'
 TEXT = u"Hello world"
 BIZ_NAME = u'Qdoba'
@@ -55,8 +55,8 @@ class TestWeightedPositiveWords(TestCase):
 		business = BUSINESS_TEMPLATE % BIZ_NAME
 
 		job = WeightedPositiveWords()
-		results = (BIZ_NAME, ('review', (TEXT, 3))),
-		(BIZ_NAME, ('categories', [COMPANY]))
+		results = ((BIZ_NAME, ('review', (TEXT, 3))),
+		(BIZ_NAME, ('categories', [COMPANY])))
 		self.assertEqual(
 			job.review_category_mapper(None, json.loads(review)).next(),
 			results[0]
@@ -87,7 +87,7 @@ class TestWeightedPositiveWords(TestCase):
 		biz_review_positivity = (BIZ_NAME, (TEXT, 3))
 
 		job = WeightedPositiveWords()
-		results = ((COMPANY, 'awesome'), (BIZ_NAME, 3))
+		results = ((COMPANY, u'world'), (BIZ_NAME, 3))
 		self.assertEqual(
 			job.review_mapper(COMPANY, biz_review_positivity).next(),
 			results

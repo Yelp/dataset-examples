@@ -37,9 +37,8 @@ class TestReviewAutoPilotCase(TestCase):
 		too long."""
 		#Random data to feed into the markov model.
 		#I use long runs of foo to get through the threshold filters.
-		text = '"foo bar foo baz foo car foo daz' + 'foo' * 10 + 'foofoo yelp \
-foo yar foo foo bar bar dar"'
-
+		text = 'foo bar foo baz foo car foo daz ' + ('foo ' * 10) + 'foofoo yelp \
+foo yar foo foo bar bar dar'
 		single_review = REVIEW_TEMPLATE % (text, BIZ)
 		business = BUSINESS_TEMPLATE % (CATEGORIES, BIZ)
 		static_stdin = StringIO(single_review + business)
@@ -70,7 +69,7 @@ foo yar foo foo bar bar dar"'
 	def test_split_mapper(self):
 		"""Tests split_mapper reducer in autopilot"""
 		job = ReviewAutoPilot()
-		TEST_RETURN = (('is', 'F'), ('a', 1))
+		TEST_RETURN = (('hello', 'C'), ('<end>', 1))
 		self.assertEqual(job.review_split_mapper(CATEGORIES, TEXT).next(),
 			TEST_RETURN)
 
