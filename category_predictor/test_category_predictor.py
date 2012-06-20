@@ -44,38 +44,29 @@ class TestCategoryPredictor(TestCase):
 		"""Tests the category_mapper to make sure it is properly running"""
 		business = BUSINESS_TEMPLATE % (CATEGORIES, BIZ_ID)
 		review = REVIEW_TEMPLATE % (TEXT, BIZ_ID)
-
 		job = CategoryPredictor()
-		self.assertEqual(
-			job.review_category_mapper(None, json.loads(review)).next(),
-			(BIZ_ID, ('review', TEXT))
-		)
-		self.assertEqual(
-			job.review_category_mapper(None, json.loads(business)).next(),
-			(BIZ_ID, ('categories', [CATEGORIES]))
-		)
+		review_results = list(job.review_category_mapper(None, json.loads(review)))
+		biz_results = list(job.review_category_mapper(None, json.loads(business)))
+		self.assertEqual(review_results, [(BIZ_ID, ('review', TEXT))])
+		self.assertEqual(biz_results, [(BIZ_ID, ('categories', [CATEGORIES]))])
 
 	def test_categories_to_reviews(self):
 		"""Tests add_categories_to_reviews to make sure it is properly running"""
 		category = [('categories', [CATEGORIES]), ('review', TEXT)]
 
 		job = CategoryPredictor()
-		result = ('all', {CATEGORIES: 1})
-		self.assertEqual(
-			job.add_categories_to_reviews_reducer(BIZ_ID, category).next(),
-			result
-		)
+		category_results = list(job.add_categories_to_reviews_reducer(BIZ_ID, category))
+		result = [('all', {CATEGORIES: 1}), (CATEGORIES, TEXT)]
+		self.assertEqual(category_results,result)
 
 	def test_tokenize_reviews(self):
 		"""Tests tokenize_reviews_mapper to make sure it is properly running"""
 		review = {CATEGORIES: 1}
 
 		job = CategoryPredictor()
-		result = ('all', {CATEGORIES: 1})
-		self.assertEqual(
-			job.tokenize_reviews_mapper('all', review).next(),
-			result
-		)
+		token_results = list(job.tokenize_reviews_mapper('all', review))
+		result = [('all', {CATEGORIES: 1})]
+		self.assertEqual(token_results, result)
 
 
 if __name__ == '__main__':

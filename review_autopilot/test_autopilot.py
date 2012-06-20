@@ -12,12 +12,13 @@ REVIEW_TEMPLATE = '{"type":"review", "stars":3, "text":"%s",\
 BUSINESS_TEMPLATE = '{"type":"business", "categories": "%s",\
 "business_id":"%s"}\n'
 TEXT = 'Hello!'
+ID = 128411
 BIZ = 'Yelp'
 # This is used to pass around dict data, which is slightly different than
 # the string data above.
 DATA = [
-	{'type':'business', 'business_id': 128411, 'data':'Info here'},
-	{'type': 'review', 'business_id':128411, 'text': TEXT}
+	{'type':'business', 'business_id': ID, 'data':'Info here'},
+	{'type': 'review', 'business_id':ID, 'text': TEXT}
 ]
 
 
@@ -26,19 +27,22 @@ class TestReviewAutoPilotCase(TestCase):
 	def test_business_mapper(self):
 		"""tests the individual mappers of ReviewAutoPilot"""
 		job = ReviewAutoPilot()
+		biz_results = list(job.business_join_mapper(None, DATA[0]))
+		review_results = list(job.business_join_mapper(None, DATA[1]))
 
-		self.assertEqual(job.business_join_mapper(None, DATA[0]).next(),
-			(128411, ('business', DATA[0])))
-		self.assertEqual(job.business_join_mapper(None, DATA[1]).next(),
-		(128411, ('review', DATA[1]['text'])))
+		biz_after_results = [(ID, ('business', DATA[0]))]
+		review_after_results = [(ID, ('review', DATA[1]['text']))] 
+
+		self.assertEqual(biz_results, biz_after_results)
+		self.assertEqual(review_results, review_after_results)
 
 	def test_smoke(self):
 		"""Uses small, static dataset possible on local, since a full run takes
 		too long."""
 		#Random data to feed into the markov model.
 		#I use long runs of foo to get through the threshold filters.
-		text = 'foo bar foo baz foo car foo daz ' + ('foo ' * 10) + 'foofoo yelp \
-foo yar foo foo bar bar dar'
+		text = ('foo bar foo baz foo car foo daz ' + ('foo ' * 10) + 'foofoo yelp'
+			'foo yar foo foo bar bar dar')
 		single_review = REVIEW_TEMPLATE % (text, BIZ)
 		business = BUSINESS_TEMPLATE % (CATEGORIES, BIZ)
 		static_stdin = StringIO(single_review + business)
@@ -62,9 +66,9 @@ foo yar foo foo bar bar dar'
 		static data."""
 		job = ReviewAutoPilot()
 		VALUES = (('business', {'categories': CATEGORIES}), ('review', TEXT))
-		self.assertEqual(job.join_reviews_with_categories_reducer(BIZ,
-																VALUES).next(),
-						(CATEGORIES, TEXT))
+		category_results = list(job.join_reviews_with_categories_reducer(BIZ, VALUES))
+		results = [(CATEGORIES, TEXT)]
+		self.assertEqual(category_results, results)
 
 	def test_split_mapper(self):
 		"""Tests split_mapper reducer in autopilot"""

@@ -7,11 +7,11 @@ import json
 from weighted_category_positivity import WeightedPositiveWords
 
 
-COMPANY = u'Company'
-REVIEW_TEMPLATE = '{"type":"review", "stars":3, "text":"%s",\
-"business_id":"%s"}\n'
-BUSINESS_TEMPLATE = '{"type":"business", "categories":["Company"], \
-"business_id":"%s"}\n'
+CATEGORY = u'Company'
+REVIEW_TEMPLATE = ('{"type":"review", "stars":3, "text":"%s",'
+'"business_id":"%s"}\n')
+BUSINESS_TEMPLATE = ('{"type":"business", "categories":["%s"], '
+'"business_id":"%s"}\n')
 TEXT = u"Hello world"
 BIZ_NAME = u'Qdoba'
 
@@ -22,10 +22,9 @@ class TestWeightedPositiveWords(TestCase):
 		"""Does a full run of weighted positive words"""
 
 		# Need 3 mock businesses to test
-		business1 = BUSINESS_TEMPLATE % "Yelp"
-		business2 = BUSINESS_TEMPLATE % "Target"
-		business3 = BUSINESS_TEMPLATE % "Walmart"
-
+		business1 = BUSINESS_TEMPLATE % (CATEGORY, "Yelp")
+		business2 = BUSINESS_TEMPLATE % (CATEGORY, "Target")
+		business3 = BUSINESS_TEMPLATE % (CATEGORY, "Walmart") 
 		# Need more than 1 review for weighted threshold
 		review1 = REVIEW_TEMPLATE % (TEXT, "Yelp")
 		review2 = REVIEW_TEMPLATE % (TEXT, "Target")
@@ -45,40 +44,35 @@ class TestWeightedPositiveWords(TestCase):
 			for line in runner.stream_output():
 				key, value = job.parse_output_line(line)
 				results.append(value)
-		result = [COMPANY, 66.0, 'hello']
-		self.assertEqual(results[0], result)
+		end_result = [[CATEGORY, 66.0, 'hello'], [CATEGORY, 66.0, 'world']]
+		self.assertEqual(results, end_result)
 
 	def test_review_category(self):
 		"""Test the review_category_mapper function with a mock input"""
 
 		review = REVIEW_TEMPLATE % (TEXT, BIZ_NAME)
-		business = BUSINESS_TEMPLATE % BIZ_NAME
+		business = BUSINESS_TEMPLATE % (CATEGORY, BIZ_NAME)
 
 		job = WeightedPositiveWords()
-		results = ((BIZ_NAME, ('review', (TEXT, 3))),
-		(BIZ_NAME, ('categories', [COMPANY])))
-		self.assertEqual(
-			job.review_category_mapper(None, json.loads(review)).next(),
-			results[0]
-		)
-		self.assertEqual(
-			job.review_category_mapper(None, json.loads(business)).next(),
-			results[1]
-		)
+		review_results = list(job.review_category_mapper(None, json.loads(review)))
+		biz_results = list(job.review_category_mapper(None, json.loads(business)))
+		review_after_results = [(BIZ_NAME, ('review', (TEXT, 3)))]				
+		biz_after_results = [(BIZ_NAME, ('categories', [CATEGORY]))]
+		self.assertEqual(review_results, review_after_results)
+		self.assertEqual(biz_results, biz_after_results)
+
 
 	def test_category_join(self):
 		"""Test the category_join_reducer function with the same results
 		from above. These tests should be used to isolate where an error
 		will come from if a person changes any of the functions in the mr
 		"""
-		review_or_categories = (('review', (TEXT, 3)),  ('categories', [COMPANY]))
+		review_or_categories = (('review', (TEXT, 3)),  ('categories', [CATEGORY]))
 
 		job = WeightedPositiveWords()
-		results = (COMPANY, (BIZ_NAME, (TEXT, 3)))
-		self.assertEqual(
-			job.category_join_reducer(BIZ_NAME, review_or_categories).next(),
-			results
-		)
+		join_results = list(job.category_join_reducer(BIZ_NAME, review_or_categories))
+		results = [(CATEGORY, (BIZ_NAME, (TEXT, 3)))]
+		self.assertEqual(join_results, results)
 
 	def test_review_mapper(self):
 		"""Test the review_mapper function to make sure that based on a mock input,
@@ -87,11 +81,9 @@ class TestWeightedPositiveWords(TestCase):
 		biz_review_positivity = (BIZ_NAME, (TEXT, 3))
 
 		job = WeightedPositiveWords()
-		results = ((COMPANY, u'world'), (BIZ_NAME, 3))
-		self.assertEqual(
-			job.review_mapper(COMPANY, biz_review_positivity).next(),
-			results
-		)
+		review_results = list(job.review_mapper(CATEGORY, biz_review_positivity))
+		results = [((CATEGORY, u'world'), (BIZ_NAME, 3)), ((CATEGORY, u'hello'), (BIZ_NAME, 3))]
+		self.assertEqual(review_results, results)
 
 if __name__ == '__main__':
 	unittest.main()
