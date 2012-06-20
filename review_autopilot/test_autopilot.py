@@ -7,7 +7,7 @@ from StringIO import StringIO
 from autopilot import ReviewAutoPilot
 
 # These are used to create stdin string data.
-CATEGORIES = 'Company'
+CATEGORY = 'Company'
 REVIEW_TEMPLATE = '{"type":"review", "stars":3, "text":"%s",\
 "business_id":"%s"}\n'
 BUSINESS_TEMPLATE = '{"type":"business", "categories": "%s",\
@@ -46,7 +46,7 @@ class TestReviewAutoPilotCase(TestCase):
 		text = ('foo bar foo baz foo car foo daz ' + ('foo ' * 10) + 'foofoo yelp'
 			'foo yar foo foo bar bar dar')
 		single_review = REVIEW_TEMPLATE % (text, BIZ)
-		business = BUSINESS_TEMPLATE % (CATEGORIES, BIZ)
+		business = BUSINESS_TEMPLATE % (CATEGORY, BIZ)
 		static_stdin = StringIO(single_review + business)
 
 		job = ReviewAutoPilot(['-r', 'inline', '--no-conf', '-'])
@@ -67,16 +67,16 @@ class TestReviewAutoPilotCase(TestCase):
 		"""Tests join_reviews_with_categories_reducer with null data and some
 		static data."""
 		job = ReviewAutoPilot()
-		VALUES = (('business', {'categories': CATEGORIES}), ('review', TEXT))
+		VALUES = (('business', {'categories': CATEGORY}), ('review', TEXT))
 		category_results = list(job.join_reviews_with_categories_reducer(BIZ, VALUES))
-		results = [(CATEGORIES, TEXT)]
+		results = [(CATEGORY, TEXT)]
 		self.assertEqual(category_results, results)
 
 	def test_split_mapper(self):
 		"""Tests split_mapper reducer in autopilot"""
 		job = ReviewAutoPilot()
 		TEST_RETURN = (('hello', 'C'), ('<end>', 1))
-		self.assertEqual(job.review_split_mapper(CATEGORIES, TEXT).next(),
+		self.assertEqual(job.review_split_mapper(CATEGORY, TEXT).next(),
 			TEST_RETURN)
 
 
