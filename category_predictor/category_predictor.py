@@ -140,13 +140,10 @@ class CategoryPredictor(MRJob):
 		yield category, filtered_counts
 
 	def steps(self):
-		return [self.mr(), # Split apart the dataset into multiple
-				# chunks. In regular hadoop-land you could change the
-				# splitter. This is normally < 30 seconds of work.
-				self.mr(self.review_category_mapper,
-						self.add_categories_to_reviews_reducer),
-				self.mr(self.tokenize_reviews_mapper,
-						self.sum_counts)] 
+		return [self.mr(mapper=self.review_category_mapper, 
+				reducer=self.add_categories_to_reviews_reducer),
+			self.mr(mapper=self.tokenize_reviews_mapper, 
+				reducer=self.sum_counts)] 
 
 
 if __name__ == "__main__":

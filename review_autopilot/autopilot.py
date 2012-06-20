@@ -125,7 +125,8 @@ class ReviewAutoPilot(MRJob):
 			return
 
 		# put a small weight on <end>, which means 'end of review'.
-		thresholded_follow_counts['<end>'] = thresholded_follow_counts.get('<end>', 0.0) + END_OF_REVIEW_RATE * float(sum(thresholded_follow_counts.itervalues()))
+		thresholded_follow_counts['<end>'] = thresholded_follow_counts.get('<end>', 0.0) 
+		thresholded_follow_counts['<end>'] += END_OF_REVIEW_RATE * float(sum(thresholded_follow_counts.itervalues()))
 
 		# re-normalize the remaining transition weights.
 		new_total = float(sum(thresholded_follow_counts.itervalues()))
@@ -134,10 +135,9 @@ class ReviewAutoPilot(MRJob):
 		yield (category, start), percentages
 
 	def steps(self):
-		return [self.mr(), # split the input by line so it's balanced across more than 1 mapper
-				self.mr(self.business_join_mapper, self.join_reviews_with_categories_reducer),
-				self.mr(self.review_split_mapper, self.follow_probs_reducer)]
-
+		return [ self.mr(mapper=self.business_join_mapper, reducer=self.join_reviews_with_categories_reducer),
+				self.mr(mapper=self.review_split_mapper, reducer=self.follow_probs_reducer)]
 
 if __name__ == "__main__":
 	ReviewAutoPilot().run()
+
