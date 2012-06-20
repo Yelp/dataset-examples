@@ -1,8 +1,9 @@
 from __future__ import with_statement
+
+import json
+import unittest
 from unittest import TestCase
 from StringIO import StringIO
-import unittest
-import json
 
 from category_predictor import CategoryPredictor
 

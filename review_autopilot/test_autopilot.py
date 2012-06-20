@@ -1,7 +1,8 @@
 from __future__ import with_statement
+
+import unittest
 from unittest import TestCase
 from StringIO import StringIO
-import unittest
 
 from autopilot import ReviewAutoPilot
 
@@ -39,8 +40,9 @@ class TestReviewAutoPilotCase(TestCase):
 	def test_smoke(self):
 		"""Uses small, static dataset possible on local, since a full run takes
 		too long."""
-		#Random data to feed into the markov model.
-		#I use long runs of foo to get through the threshold filters.
+
+		# Random data to feed into the markov model.
+		# I use long runs of foo to get through the threshold filters.
 		text = ('foo bar foo baz foo car foo daz ' + ('foo ' * 10) + 'foofoo yelp'
 			'foo yar foo foo bar bar dar')
 		single_review = REVIEW_TEMPLATE % (text, BIZ)
