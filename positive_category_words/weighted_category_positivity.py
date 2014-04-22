@@ -15,17 +15,18 @@
 import re
 
 from mrjob.job import MRJob
+from mrjob.protocol import JSONValueProtocol
 
 def avg_and_total(iterable):
-	"""Compute the average over a numeric iterable."""
-	items = 0
-	total = 0.0
+    """Compute the average over a numeric iterable."""
+    items = 0
+    total = 0.0
 
-	for item in iterable:
-		total += item
-		items += 1
+    for item in iterable:
+        total += item
+        items += 1
 
-	return total / items, total
+    return total / items, total
 
 # Considerably lower than for the simple global script, since category
 # data is much more sparse
@@ -37,93 +38,93 @@ MINIMUM_OCCURENCES = 50
 MINIMUM_BUSINESSES = 3
 
 class WeightedPositiveWords(MRJob):
-	"""Find the most positive words in the dataset."""
+    """Find the most positive words in the dataset."""
 
-	# The input is the dataset - interpret each line as a single json
-	# value (the key will be None)
-	DEFAULT_INPUT_PROTOCOL = 'json_value'
+    # The input is the dataset - interpret each line as a single json
+    # value (the key will be None)
+    INPUT_PROTOCOL = JSONValueProtocol
 
-	def review_category_mapper(self, _, data):
-		"""Walk over reviews, emitting each word and its rating."""
-		if data['type'] == 'review':
-			yield data['business_id'], ('review', (data['text'], data['stars']))
+    def review_category_mapper(self, _, data):
+        """Walk over reviews, emitting each word and its rating."""
+        if data['type'] == 'review':
+            yield data['business_id'], ('review', (data['text'], data['stars']))
 
-		elif data['type'] == 'business':
-			# skip businesses with no categories
-			if data['categories']:
-				yield data['business_id'], ('categories', data['categories'])
+        elif data['type'] == 'business':
+            # skip businesses with no categories
+            if data['categories']:
+                yield data['business_id'], ('categories', data['categories'])
 
-	def category_join_reducer(self, business_id, reviews_or_categories):
-		"""Take in business_id, ((review text and rating) or category information), emit
-		category, (biz_id, (review, rating)).
-		"""
-		categories = None
-		reviews = []
+    def category_join_reducer(self, business_id, reviews_or_categories):
+        """Take in business_id, ((review text and rating) or category information), emit
+        category, (biz_id, (review, rating)).
+        """
+        categories = None
+        reviews = []
 
-		for data_type, data in reviews_or_categories:
-			if data_type == 'review':
-				reviews.append(data)
-			else:
-				categories = data
+        for data_type, data in reviews_or_categories:
+            if data_type == 'review':
+                reviews.append(data)
+            else:
+                categories = data
 
-		# no categories found, skip this
-		if not categories:
-			return
+        # no categories found, skip this
+        if not categories:
+            return
 
-		for category in categories:
-			for review_positivity in reviews:
-				yield category, (business_id, review_positivity)
+        for category in categories:
+            for review_positivity in reviews:
+                yield category, (business_id, review_positivity)
 
-	def review_mapper(self, category, biz_review_positivity):
-		"""Take in category, (biz_id, (review, rating)) and split the
-		review into individual unique words. Emit 
-		(category, word), (biz_id, rating), which will then be used to
-		gather info about each category / word pair.
-		"""
-		biz_id, (review, positivity) = biz_review_positivity
+    def review_mapper(self, category, biz_review_positivity):
+        """Take in category, (biz_id, (review, rating)) and split the
+        review into individual unique words. Emit 
+        (category, word), (biz_id, rating), which will then be used to
+        gather info about each category / word pair.
+        """
+        biz_id, (review, positivity) = biz_review_positivity
 
-		# normalize words by lowercasing and dropping non-alpha
-		# characters
-		norm = lambda word: re.sub('[^a-z]', '', word.lower())
-		# only include a word once per-review (which de-emphasizes
-		# proper nouns)
-		words = set(norm(word) for word in review.split())
+        # normalize words by lowercasing and dropping non-alpha
+        # characters
+        norm = lambda word: re.sub('[^a-z]', '', word.lower())
+        # only include a word once per-review (which de-emphasizes
+        # proper nouns)
+        words = set(norm(word) for word in review.split())
 
-		for word in words:
-			yield (category, word), (biz_id, positivity)
+        for word in words:
+            yield (category, word), (biz_id, positivity)
 
-	def positivity_reducer(self, category_word, biz_positivities):
-		"""Read (category, word), (biz_id, positivity), and compute
-		the average positivity for the category-word pair. Skip words
-		that don't occur frequently enough or for not enough unique
-		businesses.
+    def positivity_reducer(self, category_word, biz_positivities):
+        """Read (category, word), (biz_id, positivity), and compute
+        the average positivity for the category-word pair. Skip words
+        that don't occur frequently enough or for not enough unique
+        businesses.
 
-		Emits rating, (category, # reviews with word, word).
-		"""
+        Emits rating, (category, # reviews with word, word).
+        """
 
-		category, word = category_word
+        category, word = category_word
 
-		businesses = set()
-		positivities = []
-		for biz_id, positivity in biz_positivities:
-			businesses.add(biz_id)
-			positivities.append(positivity)
+        businesses = set()
+        positivities = []
+        for biz_id, positivity in biz_positivities:
+            businesses.add(biz_id)
+            positivities.append(positivity)
 
-		# don't include words that only show up for a few businesses
-		if len(businesses) < MINIMUM_BUSINESSES:
-			return
+        # don't include words that only show up for a few businesses
+        if len(businesses) < MINIMUM_BUSINESSES:
+            return
 
-		avg, total = avg_and_total(positivities)
+        avg, total = avg_and_total(positivities)
 
-		if total < MINIMUM_OCCURENCES:
-			return
+        if total < MINIMUM_OCCURENCES:
+            return
 
-		yield int(avg * 100), (category, total, word)
+        yield int(avg * 100), (category, total, word)
 
-	def steps(self):
-		return [ self.mr(self.review_category_mapper, self.category_join_reducer),
-				self.mr(self.review_mapper, self.positivity_reducer)]
+    def steps(self):
+        return [ self.mr(self.review_category_mapper, self.category_join_reducer),
+                self.mr(self.review_mapper, self.positivity_reducer)]
 
 
 if __name__ == "__main__":
-	WeightedPositiveWords().run()
+    WeightedPositiveWords().run()
