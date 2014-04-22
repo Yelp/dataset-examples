@@ -10,19 +10,24 @@ Samples
 
 `category_predictor`: Given some text, predict likely categories. For example:
 
-    python category_predictor/predict.py category_predictor.json "bacon donut"
-    Category: "Food" - 82.66% chance
-    Category: "Restaurants" - 16.99% chance
-    Category: "Donuts" - 0.12% chance
-    Category: "Basque" - 0.02% chance
-    Category: "Spanish" - 0.02% chance
+```bash
+$ python category_predictor/category_predictor.py yelp_academic_dataset.json > category_predictor.json
+$ python category_predictor/predict.py category_predictor.json "bacon donut"
+Category: "Food" - 82.66% chance
+Category: "Restaurants" - 16.99% chance
+Category: "Donuts" - 0.12% chance
+Category: "Basque" - 0.02% chance
+Category: "Spanish" - 0.02% chance
+```
 
 `review_autopilot`: Use a markov chain to finish a review. For
 example:
 
-	python review_autopilot/generate.py Food 'They have the best'
-	They have the best coffee is good food was delicious cookies and
-	a few friends i think they make this
+```bash
+$ python review_autopilot/generate.py Food 'They have the best'
+They have the best coffee is good food was delicious cookies and
+a few friends i think they make this
+```
 
 `positive_category_words`: See the Yelp engineering blog for
 details about this example. In short, it generates positivity
