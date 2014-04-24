@@ -1,7 +1,7 @@
 Yelp's Academic Dataset Examples
 ================================
 
-We're providing three examples for use with the dataset available at
+We're providing three examples for use with the datasets available at [http://www.yelp.com/dataset_challenge](http://www.yelp.com/dataset_challenge) and 
 [http://www.yelp.com/academic_dataset](http://www.yelp.com/academic_dataset). They all depend on
 [mrjob](https://github.com/Yelp/mrjob) and python 2.5 or later.
 

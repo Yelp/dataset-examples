@@ -2,3 +2,5 @@
 *.swp
 *.pyc
 *.json
+.tox
+*.egg-info

@@ -4,7 +4,7 @@ import unittest
 from unittest import TestCase
 from StringIO import StringIO
 
-from autopilot import ReviewAutoPilot
+from review_autopilot.autopilot import ReviewAutoPilot
 
 # These are used to create stdin string data.
 CATEGORY = 'Company'
