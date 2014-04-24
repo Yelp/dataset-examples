@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Yelp/dataset-examples.svg)](https://travis-ci.org/Yelp/dataset-examples)
+
 Yelp's Academic Dataset Examples
 ================================
 
