@@ -5,7 +5,7 @@ import unittest
 from unittest import TestCase
 from StringIO import StringIO
 
-from category_predictor import CategoryPredictor
+from category_predictor.category_predictor import CategoryPredictor
 
 # These templates can be used to make a json string very easily.
 REVIEW_TEMPLATE = '{"type":"review", "stars":3, "text":"%s",\

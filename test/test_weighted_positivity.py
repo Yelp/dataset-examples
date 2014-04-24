@@ -5,7 +5,7 @@ import unittest
 from unittest import TestCase
 from StringIO import StringIO
 
-from weighted_category_positivity import WeightedPositiveWords
+from positive_category_words.weighted_category_positivity import WeightedPositiveWords
 
 
 CATEGORY = u'Company'
