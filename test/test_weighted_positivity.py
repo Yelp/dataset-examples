@@ -4,6 +4,7 @@ import json
 import unittest
 from unittest import TestCase
 from StringIO import StringIO
+import testify as T
 
 from positive_category_words.weighted_category_positivity import WeightedPositiveWords
 
@@ -84,7 +85,7 @@ class TestWeightedPositiveWords(TestCase):
         job = WeightedPositiveWords()
         review_results = list(job.review_mapper(CATEGORY, biz_review_positivity))
         results = [((CATEGORY, u'world'), (BIZ_NAME, 3)), ((CATEGORY, u'hello'), (BIZ_NAME, 3))]
-        self.assertEqual(review_results, results)
+        T.assert_sorted_equal(review_results, results)
 
 if __name__ == '__main__':
     unittest.main()
