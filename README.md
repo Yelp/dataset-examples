@@ -7,6 +7,10 @@ We're providing three examples for use with the datasets available at [http://ww
 [http://www.yelp.com/academic_dataset](http://www.yelp.com/academic_dataset). They all depend on
 [mrjob](https://github.com/Yelp/mrjob) and python 2.6 or later.
 
+To install all dependencies: `$ pip install -e .`
+
+To test: `$ testify -v test`
+
 Samples
 ------------
 
