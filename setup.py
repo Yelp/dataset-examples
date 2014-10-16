@@ -5,6 +5,7 @@ from setuptools import setup, find_packages
 requires = [
         'mrjob',
         'testify',
+        'unittest2',
         ]
 
 setup(

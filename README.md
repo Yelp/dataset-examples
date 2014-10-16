@@ -9,10 +9,16 @@ We're providing three examples for use with the datasets available at [http://ww
 
 To install all dependencies: `$ pip install -e .`
 
-To test: `$ testify -v test`
+To test: `$ tox`
 
 Samples
 ------------
+
+`json_to_csv_converter`: Convert the dataset from json format to csv format.
+
+```bash
+$ python json_to_csv_converter.py yelp_academic_dataset.json # Creates yelp_academic_dataset.csv
+```
 
 `category_predictor`: Given some text, predict likely categories. For example:
 
