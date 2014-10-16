@@ -8,4 +8,4 @@ env:
         - TOX_ENV=py27
 install:
     - pip install -e .
-script: testify -v test
+script: tox
