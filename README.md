@@ -84,5 +84,5 @@ Now that that's done, you can run the autopilot script on EMR.
 
 
 You can save money (and time) by re-using jobflows and uploading the
-dataset to a person, private s3 bucket - check out the mrjob docs for
+dataset to a personal, private s3 bucket - check out the mrjob docs for
 instructions on doing this.
