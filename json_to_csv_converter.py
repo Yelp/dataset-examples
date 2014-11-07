@@ -4,7 +4,7 @@
 For more information on the Yelp Dataset Challenge please visit http://yelp.com/dataset_challenge
 
 """
-import optparse
+import argparse
 import collections
 import csv
 import simplejson as json
@@ -105,7 +105,7 @@ def write_file(file_path, file_contents, column_names):
 if __name__ == '__main__':
     """Convert a yelp dataset file from json to csv."""
 
-    parser = optparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
             description='Convert Yelp Dataset Challenge data from JSON format to CSV.',
             )
 
