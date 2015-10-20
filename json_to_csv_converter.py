@@ -7,7 +7,7 @@ For more information on the Yelp Dataset Challenge please visit http://yelp.com/
 import argparse
 import collections
 import csv
-import simplejson as json
+import json as simplejson
 
 
 def read_and_write_file(json_file_path, csv_file_path, column_names):
