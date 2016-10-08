@@ -3,7 +3,8 @@
 =============================================================
 I'm using the business dataset. It's structure is given below
 =============================================================
-`{
+```json
+{
     'type': 'business',
     'business_id': (encrypted business id),
     'name': (business name),
@@ -28,6 +29,6 @@ I'm using the business dataset. It's structure is given below
         (attribute_name): (attribute_value),
         ...
     },
-}`
+}```
 
 Fields which are of interest are: `business_id, name, city, stars, review_count, categories`
