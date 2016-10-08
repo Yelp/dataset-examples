@@ -30,6 +30,17 @@ I'm using the business dataset. It's structure is given below
         (attribute_name): (attribute_value),
         ...
     },
-}```
+}
+```
 
-Fields which are of interest are: `business_id, name, city, stars, review_count, categories`
+Fields which are of interest are business_id, name, city, stars, review_count, categories. Their dtypes are below:
+
+name             object
+stars           float64
+review_count      int64
+full_address     object
+city             object
+state            object
+latitude        float64
+longitude       float64
+categories       object
