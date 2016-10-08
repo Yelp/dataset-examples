@@ -1,9 +1,39 @@
 [![Build Status](https://travis-ci.org/Yelp/dataset-examples.svg)](https://travis-ci.org/Yelp/dataset-examples)
 
+=============================================================
+I'm using the business dataset. It's structure is given below
+=============================================================
+{
+    'type': 'business',
+    'business_id': (encrypted business id),
+    'name': (business name),
+    'neighborhoods': [(hood names)],
+    'full_address': (localized address),
+    'city': (city),
+    'state': (state),
+    'latitude': latitude,
+    'longitude': longitude,
+    'stars': (star rating, rounded to half-stars),
+    'review_count': review count,
+    'categories': [(localized category names)]
+    'open': True / False (corresponds to closed, not business hours),
+    'hours': {
+        (day_of_week): {
+            'open': (HH:MM),
+            'close': (HH:MM)
+        },
+        ...
+    },
+    'attributes': {
+        (attribute_name): (attribute_value),
+        ...
+    },
+}
+
 Yelp's Academic Dataset Examples
 ================================
 
-We're providing three examples for use with the datasets available at [http://www.yelp.com/dataset_challenge](http://www.yelp.com/dataset_challenge) and 
+We're providing three examples for use with the datasets available at [http://www.yelp.com/dataset_challenge](http://www.yelp.com/dataset_challenge) and
 [http://www.yelp.com/academic_dataset](http://www.yelp.com/academic_dataset). They all depend on
 [mrjob](https://github.com/Yelp/mrjob) and python 2.6 or later.
 
