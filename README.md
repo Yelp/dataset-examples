@@ -44,4 +44,5 @@ city             object
 state            object
 latitude        float64
 longitude       float64
-categories       object```
+categories       object
+```
