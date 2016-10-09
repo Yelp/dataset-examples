@@ -4,12 +4,13 @@ import pandas as pd
 import numpy as np
 from pandas import DataFrame
 import datetime
-import pandas.io.data
+#import pandas.io.data
+from pandas_datareader import data, wb
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-import seaborn as sns
-from sklearn.feature_extraction.text import CountVectorizer
+#import seaborn as sns
+#from sklearn.feature_extraction.text import CountVectorizer
 
 df = pd.read_csv('sliced_dataset.csv', index_col='id')
 #print df.head(20)
