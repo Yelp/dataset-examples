@@ -22,6 +22,9 @@ from __future__ import with_statement
 import math
 import sys
 
+import plotly.plotly as py
+import plotly.graph_objs as go
+
 import category_predictor
 
 class ReviewCategoryClassifier(object):
@@ -118,5 +121,21 @@ if __name__ == "__main__":
 
 	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:5]
 
+	list1 = [];
+	list2 =[];
+
 	for guess, prob in best_guesses:
+		# format(a, '.2f')
+		list1.append(guess)
+		list2.append(format(prob * 100, '.2f'))
 		print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+		# print list1
+		# print list2
+
+
+	# labels=['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+	# values=[4500,2500,1053,500]
+
+	# trace=go.Pie(labels=list1,values=list2)
+	#
+	# py.iplot([trace])
