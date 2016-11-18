@@ -19,10 +19,25 @@ http://en.wikipedia.org/wiki/Naive_Bayes_classifier for more details.
 
 from __future__ import with_statement
 
+from flask import Flask, render_template, flash, request
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+
+
 import math
 import sys
 
 import category_predictor
+
+# App config.
+# DEBUG = True
+app = Flask(__name__)
+app.config.from_object(__name__)
+app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
+
+class ReusableForm(Form):
+    food = TextField('Food:', validators=[validators.required()])
+
+
 
 class ReviewCategoryClassifier(object):
 	"""Predict categories for text using a simple naive-bayes classifier."""
@@ -110,15 +125,34 @@ class ReviewCategoryClassifier(object):
 		return dict((cat, prob / total) for cat, prob in scores.iteritems())
 
 
-if __name__ == "__main__":
-	input_file = sys.argv[1]
-	#text = sys.argv[2]
-	text = "chicken"
+@app.route("/", methods=['GET', 'POST'])
+def hello_world():
 
-	guesses = ReviewCategoryClassifier(input_file).classify(text)
 
-	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:5]
+	input_file = 'category_predictor.json'
 
-	for guess, prob in best_guesses:
-		# print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
-		print guess, round(prob*100,2), '%'
+
+	form = ReusableForm(request.form)
+
+	print form.errors
+	if request.method == 'POST':
+			food=request.form['food']
+			print food
+
+			text = food
+			guesses = ReviewCategoryClassifier(input_file).classify(text)
+			best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:7]
+
+			if form.validate():
+				# Save the comment here.
+				for guess, prob in best_guesses:
+					data = 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+					print str(data)
+					flash('Predicted ' + str(data))
+			else:
+				flash('All the form fields are required. ')
+
+	return render_template('index.html', form=form)
+# return str(data)
+
+app.run(host='0.0.0.0', port=5002)
