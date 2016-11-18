@@ -112,11 +112,13 @@ class ReviewCategoryClassifier(object):
 
 if __name__ == "__main__":
 	input_file = sys.argv[1]
-	text = sys.argv[2]
+	#text = sys.argv[2]
+	text = "chicken"
 
 	guesses = ReviewCategoryClassifier(input_file).classify(text)
 
 	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:5]
 
 	for guess, prob in best_guesses:
-		print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+		# print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+		print guess, round(prob*100,2), '%'

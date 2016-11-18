@@ -22,7 +22,7 @@ from mrjob.job import MRJob
 from mrjob.protocol import JSONValueProtocol
 
 # require at least this many occurences for a word to show up for a
-# given category 
+# given category
 MINIMUM_OCCURENCES = 100
 
 def words(text):
@@ -85,6 +85,7 @@ class CategoryPredictor(MRJob):
 
         for category in categories:
             for review in reviews:
+                # print 'category: ' + category + 'reviews: ' + review
                 yield category, review
 
     def tokenize_reviews_mapper(self, category, review):
@@ -102,6 +103,7 @@ class CategoryPredictor(MRJob):
         counts = {}
         for word in words(review):
             counts[word] = counts.get(word, 0) + 1
+            # print counts[word]
 
         yield category, counts
 
@@ -141,12 +143,11 @@ class CategoryPredictor(MRJob):
         yield category, filtered_counts
 
     def steps(self):
-        return [self.mr(mapper=self.review_category_mapper, 
+        return [self.mr(mapper=self.review_category_mapper,
                 reducer=self.add_categories_to_reviews_reducer),
-            self.mr(mapper=self.tokenize_reviews_mapper, 
-                reducer=self.sum_counts)] 
+            self.mr(mapper=self.tokenize_reviews_mapper,
+                reducer=self.sum_counts)]
 
 
 if __name__ == "__main__":
     CategoryPredictor().run()
-
