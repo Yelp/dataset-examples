@@ -19,10 +19,25 @@ http://en.wikipedia.org/wiki/Naive_Bayes_classifier for more details.
 
 from __future__ import with_statement
 
+from flask import Flask, render_template, flash, request
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+
+
 import math
 import sys
 
 import category_predictor
+
+# App config.
+DEBUG = True
+app = Flask(__name__)
+app.config.from_object(__name__)
+app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
+
+class ReusableForm(Form):
+    name = TextField('Name:', validators=[validators.required()])
+
+
 
 class ReviewCategoryClassifier(object):
 	"""Predict categories for text using a simple naive-bayes classifier."""
@@ -110,15 +125,25 @@ class ReviewCategoryClassifier(object):
 		return dict((cat, prob / total) for cat, prob in scores.iteritems())
 
 
-if __name__ == "__main__":
-	input_file = sys.argv[1]
+@app.route('/query/<query>')
+def hello_world(query):
+    # if __name__ == "__main__":
+	# input_file = sys.argv[1]
+	input_file = 'category_predictor.json'
 	#text = sys.argv[2]
-	text = "chicken"
-
+	text = query
 	guesses = ReviewCategoryClassifier(input_file).classify(text)
 
 	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:5]
 
 	for guess, prob in best_guesses:
-		# print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
-		print guess, round(prob*100,2), '%'
+		data = 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+		print str(data)
+		# print guess, round(prob*100,2), '%'
+	# response = data
+	# response.headers["content-type"] = "text/plain"
+
+	# return response
+	# return 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+	return str(data)
+app.run(host='0.0.0.0', port=5002)
