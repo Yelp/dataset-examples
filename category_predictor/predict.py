@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
 	guesses = ReviewCategoryClassifier(input_file).classify(text)
 
-	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:5]
+	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:8]
 
 	list1 = [];
 	list2 =[];
