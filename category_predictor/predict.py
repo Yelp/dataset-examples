@@ -78,7 +78,7 @@ class ReviewCategoryClassifier(object):
 		"""Classify some text using the result of the
 		CategoryPredictor MRJob. We use a basic naive-bayes model,
 		eg, argmax_category p(category) * p(words | category) ==
-		p(category) * pi_{i \in words} p(word_i | category).
+		 p(category) * pi_{i \in words} p(word_i | category).
 
 		p(category) is stored in self.category_prob, p(word | category
 		is in self.word_given_cat_prob.

@@ -1,8 +1,14 @@
 [![Build Status](https://travis-ci.org/Yelp/dataset-examples.svg)](https://travis-ci.org/Yelp/dataset-examples)
 
-=============================================================
-I'm using the business dataset. It's structure is given below
-=============================================================
+Here are some infographics to represent the predictions:
+
+<p align="center">
+  <img src="https://github.com/saurabh21289/dataset-examples/blob/master/Charts/Chicken%20wings.png" width="350"/>
+  <img src="https://github.com/saurabh21289/dataset-examples/blob/master/Charts/Sushi.png" width="350"/>
+  <img src="https://github.com/saurabh21289/dataset-examples/blob/master/Charts/Noodles.png" width="350"/>
+</p>
+
+I am using the Yelp academic dataset with reviews. It's structure is given below
 
 ```json
 {

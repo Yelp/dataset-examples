@@ -129,7 +129,7 @@ class ReviewCategoryClassifier(object):
 def hello_world():
 
 
-	input_file = 'category_predictor.json'
+	input_file = 'category_predictor_merged.json'
 
 
 	form = ReusableForm(request.form)
