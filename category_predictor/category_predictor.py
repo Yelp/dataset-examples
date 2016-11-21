@@ -85,7 +85,6 @@ class CategoryPredictor(MRJob):
 
         for category in categories:
             for review in reviews:
-                # print 'category: ' + category + 'reviews: ' + review
                 yield category, review
 
     def tokenize_reviews_mapper(self, category, review):
@@ -103,7 +102,7 @@ class CategoryPredictor(MRJob):
         counts = {}
         for word in words(review):
             counts[word] = counts.get(word, 0) + 1
-            # print counts[word]
+            print counts[word]
 
         yield category, counts
 

@@ -1,4 +1,0 @@
-digraph Tree {
-node [shape=box] ;
-0 [label="entropy = 0.0\nsamples = 1\nvalue = 1.0"] ;
-}
