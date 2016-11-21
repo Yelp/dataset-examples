@@ -4,3 +4,5 @@
 *.json
 .tox
 *.egg-info
+
+yelp_academic_dataset.csv
