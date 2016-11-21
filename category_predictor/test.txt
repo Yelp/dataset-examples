@@ -1,0 +1,277 @@
+System Architecture
+
+The proposed control solution for 2x18 MW Rolep Hydro Electric Power Plant consists of two units. Each unit is controlled by a set of Programmable Logic Controller (PLC), excitation system, and other control equipment. The programmable logic controller has built-in logics to handle unit operations, like startup/shutdown, governor control, interlock checking, etc. This solution therefore provides a quick response, real-time control system for safe and efficient unit and plant operation.
+For supervisory control and data acquisition (SCADA) activities, dual redundant SIRIUS based SCADA servers are provided which will communicate with the PLCs for acquisition and control of the plant I/O. A separate PC for sequence of events recording is provided. Another PC for engineering and diagnostics is provided. All of the computers will be connected over Ethernet.
+Communication
+General
+
+The control solution is based on two separate networks – dual redundant RS485 serial network for communication between SCADA computers and the Programmable Logic Controllers, and the IEEE 802.3 Ethernet for communication between the SCADA Computers. Separate networks ensure smoother performance with virtually no congestion. This provides efficient and reliable communication for plant monitoring and control.
+
+The communication between the various components of SIRIUS is primarily based on local area communication network (LAN) which is designed accordance with ISO’s seven layer model for Open System Interconnection (OSI). This network provides real-time communication between the SCADA servers, operator stations, engineering station and other equipment on the LAN.
+The RS485 (SNP) network provides connectivity between the PLCs and the SCADA computers. A separate RS485 (Modbus) network provides connectivity between the PLCs and the temperature scanners, Energy Analyzers, and the unit operation display board.
+MIMIC Panel
+
+The MIMIC panel is driven via directly from the field or from the PLC outputs. 
+
+
+Hardware Description
+Programmable Logic Controllers (PLC)
+
+The proposed control system consists of GEFanuc 90-30 Series PLCs (CPU 363) in redundant CPU configuration. The control room will have two numbers of PLCs, one for each unit, which will be housed in side the unit sequencer panel. Another PLC would for controlling the common auxiliaries, line and bus coupler controls, and other plant I/O is provided which would be housed in a separate panel. Each PLC is equipped with two RS 485 communication port for communication with SCADA Stations and the Temperature Scanners, Energy Analyzers and the unit display.
+* One number of PLC for Common Auxiliaries with the following I/O count (10% spare I/O included):
+* 34 DI
+* 13 DO
+* 4 AI
+* Two nos. of Energy Analysers have also been included and they will communication with the common PLC over RS 485 Modbus communication network.
+* Two numbers of PLCs for interfacing signals from each unit. This will provide independent PLC for each unit with the following I/O count per unit (10% spare I/O included):
+* 85 DI
+* 31 DO 
+* 8 AI
+* 6 DO
+* Three nos. of 30-channel Temperature scanner with TFT LCD and two nos. of Energy Analyser have also been included and they will communication with the unit PLC over RS 485 Modbus communication network.
+
+Following is the total number of I/O modules included in the offer –
+Module TypeTotal Nos.
+(With 20% spare slots per module)Digital Input11Digital Output9Analog Input5Analog Output5Personal Computers
+
+Three numbers of Personal Computers, two for redundant SCADA servers, one for the engineering station, and the other for SoE recording, of make Compaq/IBM/Dell/HP/HCL will be supplied to meet the requirement of the control system. All of the supplied computers will have the following configuration:
+Intel P IV 2.4 GHz CPU
+256 MB RAM
+Minimum 40 GB Hard Disk
+48X CD ROM Drive
+16 MB AGP Graphics Controller or higher
+21’’ FST color monitor supporting more than one million pixel resolutions
+10/100 MBPS Network Interface Controller
+Keyboard, Mouse, 250 W Power Supply
+Standby SCADA server will be equipped with CD-Writer in place of a CD ROM Drive. This will facilitate data back-ups periodically.
+Sequence of Events Recorder (SER)
+
+A separate GEFanuc 90-30 series PLC (CPU 350) for SoE recording will be provided. This PLC would be connected on a separate RS485/RS232 SNP network. A separate PC will be provided for acquiring the SoE inputs from this PLC and recording in its local database. The SoE inputs (digital inputs) for the PLC are provided through GEFanuc Genius Bus I/O (IC693MDL646) which has a scan time of 1 millisecond. These I/O modules would be connected to the field inputs via opto-couplers. A provision for up to 200 events covering the plant I/O has been kept.
+Energy Analyzers
+
+Six numbers of Power Max EM 6400 Energy Analyzers from ENERCON for measuring the following inputs of the units, lines are provided.
+* Current
+* Voltage
+* MW
+* MVAR
+* Frequency
+* Power factor
+Each such energy analyzer would be connected to the unit’s/common PLC over an RS485 Modbus network. The energy analyzers would receive the inputs directly from the CT & PT inputs. The Power Max EM 6400 lies in the accuracy class 1.0. It supports auto scaling from Kilo to Mega to Giga. 10-year backup of integrated data is supported by Power Max EM 6400.
+Auto Synchronizer
+
+One number of SEGC’s PSY2 Auto Synchroniser is included in the system. PSY2 is microprocessor controlled with self test program and is software controlled for the supervision of all functions. The PSY2 compares and issues impulses for balancing the voltage, frequency & phase angle of generator with busbar. It issues output impulse to close circuit breaker when these parameters are within preset limits. It contains adjustable voltage- and frequency supervision; angle differential measurement with angle indication with light emitting diodes.
+The auto synchronizer will be housed in a separate synchronizer panel. A selector switch will be provided on the panel using which unit selection can be made when in MANUAL mode. When in AUTO mode, the unit’s PLC will automatically select the unit that is to be synchronized.
+Synchro Check Relay
+
+The system has SEGC SY/SP Synchro Check Relay to check the voltages, frequencies & phase angle between two power systems for their pre-set limits for manual synchronising and then only permits for closure of the circuit breaker.
+Temperature Recorders
+
+Six number of temperature recorders with 30 channels each is provided for recording the temperature signals from each of the units. The temperature recorders will be connected to the RS485 Modbus network, for communication with the PLC. The recorders will have a 5.5” color TFT LCD, with internal storage memory. Data from this memory can be transferred to PC via a floppy disk.
+Display
+
+Two number of 1x40 characters 5x7 matrix LED display for display error and status messages during unit operation will be provided. The character size of the display would be 1.5” and would be visible from 30 feet inside the control room. These would be mounted on the respective unit panels. The displays would be driven by the unit PLC and would be connected on the RS485 Modbus network.
+Printers
+
+Two numbers of A3 laser printers will be provided which will be connected to LAN for easy accessibility to all the computers on the network.
+Two numbers of A4 color inkjet printers will be provided for graphics and SoE printing. One such printer will be connected to the LAN, and the other to the SoE PC.
+Network Switch
+
+One network switch, with 8 ports of make 3COM/D-Link/SureCom/ACCTON will be provided for communication between the SCADA computers.
+
+MIMIC Panel
+
+A Mosaic based MIMIC panel (2.2mx3m) will be provided for MIMIC display of size 1.25m x 2m. The panel will be constructed with 25x25 mm Mosaic tiles with plug-in modules. The MOSAIC tiles are flame retarding, anti-static, light-resisting and non-reflecting.
+MIMIC diagrams will be made with colored symbolic tiles with engraved letters. 
+The MIMIC panel will have provision for displaying panel meters as per BOM. Illuminated push buttons and selector switches for manual control are also included at the mimic panel. The required no. of interposing relays and signal multipliers have been included.
+Protection Relays
+
+There are no protection relays envisaged for the system as per the enquiry. Hence, no such numerical relays are included in the offer. However, if required a separate offer for the same can be provided.
+Battery Bank
+
+The battery chargers and battery bank for supplying DC voltage to the unit and synchronization panels is NOT INCLUDED IN OUR SCOPE.
+UPS
+
+5 KVA Online UPS of make IL/APC/HiRel in redundant configuration with common battery bank, static bypass switch will be provided for the control room back-up for 30 minutes.
+
+
+Application Description
+Programmable Logic Controllers
+
+The four nos. of PLCs communicate with the SIRIUS servers over the plant network on GE-Fanuc’s series ninety protocol (SNP). 
+The unit PLCs and the common will acquire data from the respective units, common auxiliaries, and line and bus couplers. The PLCs will be programmed for initializing automatic commands based on the field inputs. The PLC will also be programmed for any or all of the following:
+* Start / stop of the unit
+* Start / stop the plant
+* Governor control logics
+* Interlock logics
+* Mechanical protection logics
+* Automatic start/stop of station auxiliaries
+Typical control logics based on plant operation are as illustrated below:
+Control Logics
+
+Running of turbine and generator requires a sophisticated sequence control which involves controlling of other associated equipment like OPU, main inlet valve, bypass valve etc. as well. This control is built into the PLC. A single start command for the unit causes the PLC to control all these equipment. While the unit is starting up, it is not required, to operate each of these equipments separately.
+These sequences will be operated only when the pre start conditions like Governor, AVR, OPU should be in Auto and Remote mode; Guide Vane should be closed etc. will be satisfied.
+Start Sequence
+The unit will be operated in one of the three modes:
+* Automatic mode
+* Step by Step mode
+* Automatic Inactive mode
+* Protection functions for emergency and control action shutdown.
+
+Automatic Mode
+
+The above operations would be possible from the unit operation picture described in the next section. These commands from MMI can take effect only if the unit has been put into ‘Auto’ mode.
+The above commands from the MMI system are routed to the PLC. Therefore the effect of these commands would be the same as pressing of corresponding push-buttons on the control panel.
+Whenever the operator wants to run the unit in this mode, he just has to give a single command for the ‘Unit Start’ from MMI and the sequence will take care of rest of the operation and required conditions. 
+If any error occurs while operating the sequence then an error message will be displayed in the unit operation picture specifying the reason of failure. The same message will also be displayed on the LED display located on the unit’s control panel.
+
+Step by Step Mode
+
+The commands for this mode will take effect only when the operator will take control of the unit in ‘Step by Step’ mode. All the data related to pre-start conditions will be displayed on the MMI and if the required conditions to start the unit in this mode are satisfied then operator can start the unit by pressing “Step 1” command button. Once the first step is over, the operator can click on the subsequent steps to proceed with the sequential start. The current status of the equipment will also be displayed on the MMI.
+
+If any error occurs while operating the sequence for any step then an error message will be displayed in the unit operation picture specifying the reason of failure. The same message will also be displayed on the LED display located on the unit’s control panel.
+
+Automatic Inactive Mode
+
+This mode can be initiated only when the equipments will be in Remote and Manual mode. In this mode operator can control the equipments individually i.e. he can give the command to OPU, Governor etc. separately and the sequence will check the pre-start conditions for the same command. In case of any error, it will be displayed in the unit operation picture. The same message will also be displayed on the LED display located on the unit’s control panel.
+Shutdown Sequence
+
+Shutdown sequence can be initiated in two ways: ‘Emergency Stop’ and ‘Normal Stop’.
+
+* Emergency Stop
+If at any time for any reason unit has to be stopped in emergency condition then the shutdown sequence will sequentially give the following commands to the unit irrespective of all the other conditions.
+o Open Generator Breaker;
+o Open Isolator 89B and Isolator 89T;
+o Excitation off;
+o Close Guide Vane, BFV and Bypass
+
+* Normal Stop
+If the unit tripped because of failure of any condition required to running the unit in normal mode then the PLC will initiate the sequence for ‘Normal Stop’ mode. The sequence will first of all reduce the load up to the minimum level and then give the commands to perform all other operations mentioned in the ‘Emergency Stop’ section.
+
+
+Shutdown Logics
+All the protection related signals will be used by PLC sequences to take care of the shutdown logics.
+Joint Control
+
+Joint Control function has been developed primarily with the idea that a single power setpoint from the operator should be automatically converted into the individual setpoints that should be downloaded to individual units. 
+Joint control of the unit would be done from a ‘Joint Control’ picture from where the following could be achieved:
+Each Unit can be either in INDIVIDUAL control mode or JOINT control mode. In INDIVIDUAL Control Mode, only the Raise/Lower command of the Unit will affect the power generation of the unit.  When a unit starts, it would automatically be set to INDIVIDUAL mode so that operator intentionally includes it for joint control at a later stage. The operator would have the option to put a unit into INDIVIDUAL or JOINT mode at any point of time. 
+One or more units in JOINT mode will be controlled from a common power setpoint.  When the operator changes this setpoint, the following happens for the units in JOINT control mode. (The units in INDIVIDUAL control mode are not affected by the Joint setpoint):
+* The setpoint is validated against the combined capacity of the units in JOINT control mode. 
+* For each unit, there is a weightage value (0 to 1) which an operator can change at any time. The combined power setpoint would be distributed in proportion of weightage of the units  
+When a unit is in JOINT control mode, its Individual Raise/Lower commands cannot be executed. An attempt to do so will show an error message to the operator.
+While the unit is running, the process of bringing the unit from INDIVIDUAL to JOINT control mode or vice-versa is bumpless. 
+When a unit is taken from INDIVIDUAL to JOINT control mode, then it keeps producing the same amount of power as before when it was in INDIVIDUAL mode. Any new JOINT setpoint will affect this unit as well. 
+When a unit is taken from JOINT to INDIVIDUAL mode then it keeps producing the power as per its last setpoint given according to the JOINT control. From then on, the individual Raise/Lower command will be used to change the power generated by the unit.
+The ‘Joint Control’ picture displays all the data required for joint/individual control of the units. Important parameters are:
+* Current control mode of each unit
+* Weightage of each unit for joint control
+* Current Joint Setpoint
+* Buttons for Individual control of each unit.
+The Joint Control picture will also have interface to stop all the units together in case of emergency.
+The flowchart for the working of Joint Control is as follows:
+
+Flowchart – Joint Controller
+Process Optimization
+
+This software module will take inputs from the operator and calculate the power that can be generated by the plant in the most efficient manner possible. For this purpose, it uses the efficiency curves for each turbine to calculate the optimum speed and load for each unit and based on this calculates the optimum power that can be generated by the plant as a whole.
+This module can be operated in two modes – operating mode and guiding mode. In the operation mode, the calculated optimal solution is used to give corresponding setpoints to the respective units. In guiding mode, the optimal solution is presented to user for guiding him in his operation of the plant.
+
+SIRIUS Server Stations
+
+The SIRIUS Server stations are configured in hot standby mode with SIRIUS SCADA Server and DAS loaded on them.  Server is the brain behind SIRIUS. It processes the acquired data from the field and carries out designated actions like generating alarm and events, logging, updating MMI displays. If configured, server can make intelligent decisions by analyzing the acquired data like executing complex sequences, emergency shutdown commands, and any other device command. The server also maintains the history and management information for generating pre-configured timer based reports. The history is used to analyze the data using tends and reports.
+The following are some of the important functions of the SIRIUS server:
+* Generation of alarm & event on the acquired data
+* Logging data for maintaining history
+* Generating pre-configured timer based or on demand reports
+* Providing data for trending
+* Carrying out operator requests from various MMI Clients
+* Executing Sequences and logics configured for intelligent decision making
+* Synchronizing the hot standby server with all the process data
+* Performing automatic switch over in the event of online server failure
+
+Redundancy is the main feature of SIRIUS server. All the transactions and data on the online side are simultaneously synchronized with the standby server. In case of a machine crash, the standby server automatically takes over and the data acquisition is resumed. The switchover is fast enough so that data acquisition is not interrupted for more than a few seconds. The data loss is minimal which is unavoidable if the transaction was in progress. All the operator actions are carried out on to the new server that was issued on the previous server. The history remains intact with no loss.
+
+The SIRIUS DAS communicates with the SIRIUS server using OPC. The Front End Processor acquires data from the various field devices and passes it to the server using OPC. The data acquired from the field is converted from raw form to the cooked form and then passed through any configured conversions before being sent to the server. The DAS continuously monitors the state of the filed devices along with their communication lines. The DAS is responsible for switching the devices to redundant communication lines in the event of primary communication line failure. 
+The Front End is also configured in redundant configuration and the Front Ends are switched in the event of failure.
+Operator Workstations
+
+The SIRIUS servers double up as operator workstations and are loaded with SIRIUS MMI Client software for viewing, controlling and maintenance of the complete plant. SIRIUS MMIs are built using VC++ and OpenGL providing a modular design and high quality graphics.
+Each of the MMI connects automatically with the online server present on the network. The communication with the server is based on SIRIUS’ proprietary protocol that reduces the unwanted network traffic thereby maximizing the network performance.
+SIRIUS MMI provides the user the complete view of the plant in the form of process graphics. The process graphics are configured on project basis by putting in the relevant information. The process graphics are then logically linked with each other so that operator can jump from one section to another with a single click. An operator can view eight process graphics simultaneously.
+SIRIUS MMI is programmed to work with normal keyboards to act as function keyboards. The keys are configured for the following general purposes:
+* Acknowledging Alarms
+* Control Actions
+* Opening a process graphic
+* Accessing Standard UDTs for opening Process Graphics
+* Data Entry
+It also has the provision to customize the keys according to the project needs.
+SIRIUS has a comprehensive security mechanism built into it. The user with desired privileges only can access the objects inside a process graphic. An authorized user can perform any of the following actions:
+* Controlling a device in the field
+* Blocking acquisition of a signal from field
+* Acknowledging alarms
+* Executing sequence logics
+* Performing maintenance actions like restoring history, manual backups
+* Masking alarm & events
+* Blocking commands
+
+In addition to the above, an operator analyses the system using the alarm, event and SOE lists. All these lists are accessible to an operator from any process graphics with just a single click. The alarm and event lists are further grouped according to the systems defined in a project like Process System and Control System. A list for a particular system displays the information related to that system. For example, a process system alarm list will display alarm, related only to process like a point crossing its high limit or a circuit breaker being closed, while a control system alarm list will show alarms like plc inoperable, operator workstation not connected etc.
+SIRIUS MMI has a small window that displays a flashing red icon in case there is an alarm present in the system. A latest alarm window can be brought into view by clicking the icon. The latest alarm window is configured to display a certain number of latest alarms present in the system. This ensures that the user never misses any latest alarm present in the system. The icon turns static white after all the alarms have been acknowledged.
+An operator can analyze history using the historical trends. All the trends are configured on project basis. The operator can scroll infinitely back in to the time to view the historical data. Any curve can be configured to belong to two separate time axis so that operator can compare the same point across two different times. Up-to eight curves can be configured in a single trend and each process graphic can have any number of trends.
+
+A sample single line diagram depicting the details of a unit
+
+SIRIUS MMI also provides on demand trends. This feature gives the operator more flexibility and information on demand. An operator can select any point in a process graphic and view its trend. The trend is shown in a separate small window that can be docked to ant side of the client.
+Help for every alarm and event can also be configured in SIRIUS. This help is accessible to the operator while viewing alarm and events. The operator can access the help any time by just right clicking the desired alarm or point and selecting help.
+SIRIUS MMI provides bump less switchover in case of online server going down either due to maintenance reasons or machine crash. The pictures remain opened for the operator after the switchover. An authorized user can also perform a manual switchover of the servers for maintenance reasons.
+Sequence of Events Recording
+
+A separate PC for sequence of events (SoE) recording will be provided. This PC will acquire time-stamped inputs from the SoE PLC with a resolution of 1 millisecond. The data thus accumulated will be logged into the local database and can be provided for viewing/printing on/from the local MMI. If required this data can be transferred to the SCADA servers also.
+
+Unit Synchronization
+
+Auto Synchronization
+
+The auto synchroniser will be used to compare and issue impulses for balancing the voltage, frequency & phase angle of generator with bus bar. When these parameters are within preset limits, then only it will issue output impulse to close the circuit breaker. 
+A unit selector switch will be used to select the unit to which the synchronisation should be done. Depending on the unit selected, its signals for generator voltage, circuit breaker etc. along with busbar voltage will be passed to the synchroniser so that it can perform the desired operation of closing the circuit breaker whenever the condition of synchronisation occurs.
+Auto synchroniser will be installed in series with the Check Synchro Relay so that the dual check can be applied before closing the circuit breaker actually.
+
+Manual
+
+All the signals selected by above discussed unit selector switch will be wired up parallely to both the auto synchroniser as well as synchro check relay. When the unit is in MANUAL mode, output of auto synchroniser will be cut and only the Generator CB Close Push Button on the Panel will be used to close the circuit breaker. Also, Auto Synchronizer’s control outputs to AVR for increase/decrease of voltage and to governer for increase/decrease of frequency will remain disabled in MANUAL mode. 
+In the case of AUTO mode, Synchro check relay will validate whether correct conditions exist for closing the circuit breaker in MANUAL mode also. 
+MIMIC Panel
+
+The proposed control system is equipped with Mosaic based MIMIC panel for showing the critical plant information and the plant’s single line diagram (SLD). The MIMIC panel is divided in to the following sections:
+* Hydraulic Section: This section displays the complete hydropower system as standing graphics with built in indicators, alarm lights, status lights, transfer switches
+* Electrical Distribution Section: This section shows the switchyard section as the standing graphics with transformer On/OFF function, Station service generator Start/Stop function, DC System and the electrical auxiliary distribution system. The generator switches shall be indicated with the actual position only. The switch operation will be executed from the turbine generator section.
+* Unit Turbine Generator Section: This displays the complete power generating system from the turbine generator to the transmission lines including the following:
+* Power Output, MW and MVAR
+* Digital Frequency Indicator
+* Turbine Speed indicator
+* Emergency push buttons
+* Generator voltage and current with selector switch
+* Power factor
+* Excitation voltage and current
+* A 100mm digital display for displaying the total MW, MVAR flow from the units will be also be located on the MIMIC.
+VersaPro, PLC programming and Diagnostic Software
+
+VersaPro, GE Fanuc's new programmer of choice for VersaMax and Series 90-30 PLCs, boosts productivity with easy-to-use graphically based configuration tools. VersaPro software is designed to be easy to use - that means that you should be able to configure a PLC, write logic, connect and store to a PLC within five minutes - without ever using a menu! 
+
+You can start VersaPro, configure hardware, write logic in IL or RLD, store the program to a PLC and monitor that program without ever having to use a menu. Everything you need to perform these functions is found on a simple, easy-to-use toolbar. Drag-and-drop works throughout the package, eliminating tedious keyboard entry and reducing the opportunities for mistakes. 
+VersaPro allows the engineers to monitor the data inside the PLC from the computer. You can debug the logic stored in PLC by connecting to the PLC. The logic can be debugged step by step. The engineer can also change the values of various PLCs variables from this software. This allows the engineer to simulate and test the conditions as required.
+
+
+
+Software Functional 
+Description
+
+Please refer to the attached data sheet(s).
+
+
+Control System For 2x18 MW Rolep Hydroelectric Power Plant
+
+
+
+
+Control System For Hydroelectric Power Plant in Vietnam  	1 of 15 
+
