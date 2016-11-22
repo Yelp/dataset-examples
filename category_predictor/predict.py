@@ -78,7 +78,7 @@ class ReviewCategoryClassifier(object):
 		"""Classify some text using the result of the
 		CategoryPredictor MRJob. We use a basic naive-bayes model,
 		eg, argmax_category p(category) * p(words | category) ==
-		p(category) * pi_{i \in words} p(word_i | category).
+		 p(category) * pi_{i \in words} p(word_i | category).
 
 		p(category) is stored in self.category_prob, p(word | category
 		is in self.word_given_cat_prob.
@@ -112,11 +112,13 @@ class ReviewCategoryClassifier(object):
 
 if __name__ == "__main__":
 	input_file = sys.argv[1]
-	text = sys.argv[2]
+	#text = sys.argv[2]
+	text = "chicken"
 
 	guesses = ReviewCategoryClassifier(input_file).classify(text)
 
 	best_guesses = sorted(guesses.iteritems(), key=lambda (_, prob): prob, reverse=True)[:5]
 
 	for guess, prob in best_guesses:
-		print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+		# print 'Category: "%s" - %.2f%% chance' % (guess, prob * 100)
+		print guess, round(prob*100,2), '%'
