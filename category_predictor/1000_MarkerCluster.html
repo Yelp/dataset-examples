@@ -1,0 +1,1391 @@
+
+        <!DOCTYPE html>
+        <head>
+            
+        
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster-src.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://raw.githubusercontent.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
+        
+        
+        
+            
+            <style>
+
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                }
+
+            #map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+            
+        
+            
+            <style> #map_b8d3aabeb1bc4f6b8035968758e932df {
+                position : relative;
+                width : 100.0%;
+                height: 100.0%;
+                left: 0.0%;
+                top: 0.0%;
+                }
+            </style>
+        
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+        
+        
+        
+        
+        </head>
+        <body>
+            
+        
+            
+            <div class="folium-map" id="map_b8d3aabeb1bc4f6b8035968758e932df" ></div>
+        
+        
+        
+        </body>
+        <script>
+            
+        
+            
+
+            var southWest = L.latLng(-90, -180);
+            var northEast = L.latLng(90, 180);
+            var bounds = L.latLngBounds(southWest, northEast);
+
+            var map_b8d3aabeb1bc4f6b8035968758e932df = L.map('map_b8d3aabeb1bc4f6b8035968758e932df', {
+                                           center:[40.4021198304,-80.003435752],
+                                           zoom: 1,
+                                           maxBounds: bounds,
+                                           layers: [],
+                                           crs: L.CRS.EPSG3857
+                                         });
+            
+        
+        
+            
+            var tile_layer_43a43c6d8a484898bcc2546c0a942bee = L.tileLayer(
+                'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 18,
+                    minZoom: 1,
+                    attribution: '(c) <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (c) <a href="http://cartodb.com/attributions">CartoDB</a>, CartoDB <a href ="http://cartodb.com/attributions">attributions</a>',
+                    detectRetina: false
+                    }
+                ).addTo(map_b8d3aabeb1bc4f6b8035968758e932df);
+
+        
+        
+            
+                var marker_cluster_fd9d79129fe74eb8aa35282fbf56363f = L.markerClusterGroup();
+                map_b8d3aabeb1bc4f6b8035968758e932df.addLayer(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+
+            var marker_a531eafc0fd74cf889133972dc03210c = L.marker(
+                [40.3543266,-79.9007057],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_802d644280b34b808661cfd0feaf1044 = L.popup({maxWidth: '300'});
+
+            
+                var html_44241e039cab447f897c9775d0773fb0 = $('         <div id="html_44241e039cab447f897c9775d0773fb0"                 style="width: 100.0%; height: 100.0%;">                 Mr Hoagie, Rating = 3.5</div>                 ')[0];
+                popup_802d644280b34b808661cfd0feaf1044.setContent(html_44241e039cab447f897c9775d0773fb0);
+            
+
+            marker_a531eafc0fd74cf889133972dc03210c.bindPopup(popup_802d644280b34b808661cfd0feaf1044);
+
+            
+        
+        
+            
+
+            var marker_a132238aff804c1298837a12d90941da = L.marker(
+                [40.3505527,-79.8868138],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_86bb85a36eee4bb5997a19bd21cc4b8b = L.popup({maxWidth: '300'});
+
+            
+                var html_13fe396b53e34eeb9d240bf159848774 = $('         <div id="html_13fe396b53e34eeb9d240bf159848774"                 style="width: 100.0%; height: 100.0%;">                 Clancy&#39;s Pub, Rating = 3.0</div>                 ')[0];
+                popup_86bb85a36eee4bb5997a19bd21cc4b8b.setContent(html_13fe396b53e34eeb9d240bf159848774);
+            
+
+            marker_a132238aff804c1298837a12d90941da.bindPopup(popup_86bb85a36eee4bb5997a19bd21cc4b8b);
+
+            
+        
+        
+            
+
+            var marker_80e6d6c5c8cf46ceb73ed557c0e071bf = L.marker(
+                [40.3541155,-80.0146597],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_8e73ece049fc4ab180421e69bccd1366 = L.popup({maxWidth: '300'});
+
+            
+                var html_6801da3ef04c461aac812d406607c4c5 = $('         <div id="html_6801da3ef04c461aac812d406607c4c5"                 style="width: 100.0%; height: 100.0%;">                 Cool Springs Golf Center, Rating = 2.5</div>                 ')[0];
+                popup_8e73ece049fc4ab180421e69bccd1366.setContent(html_6801da3ef04c461aac812d406607c4c5);
+            
+
+            marker_80e6d6c5c8cf46ceb73ed557c0e071bf.bindPopup(popup_8e73ece049fc4ab180421e69bccd1366);
+
+            
+        
+        
+            
+
+            var marker_b17a5c6cdc3144c08d646c9c14d40844 = L.marker(
+                [40.4088301,-79.8662107],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_7d6bf4bef8db4004956722eed27b23c4 = L.popup({maxWidth: '300'});
+
+            
+                var html_d6771b04f28d475d907a1db3ec4ac521 = $('         <div id="html_d6771b04f28d475d907a1db3ec4ac521"                 style="width: 100.0%; height: 100.0%;">                 Emil&#39;s Lounge, Rating = 4.5</div>                 ')[0];
+                popup_7d6bf4bef8db4004956722eed27b23c4.setContent(html_d6771b04f28d475d907a1db3ec4ac521);
+            
+
+            marker_b17a5c6cdc3144c08d646c9c14d40844.bindPopup(popup_7d6bf4bef8db4004956722eed27b23c4);
+
+            
+        
+        
+            
+
+            var marker_b052a7080d114457bf8466d498c4e97e = L.marker(
+                [40.4034049,-79.8557821],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_8c0c40095a5b4772b534286874d17034 = L.popup({maxWidth: '300'});
+
+            
+                var html_8d402fdfdbca40f0985c1e73f3208a97 = $('         <div id="html_8d402fdfdbca40f0985c1e73f3208a97"                 style="width: 100.0%; height: 100.0%;">                 Grand View Golf Club, Rating = 5.0</div>                 ')[0];
+                popup_8c0c40095a5b4772b534286874d17034.setContent(html_8d402fdfdbca40f0985c1e73f3208a97);
+            
+
+            marker_b052a7080d114457bf8466d498c4e97e.bindPopup(popup_8c0c40095a5b4772b534286874d17034);
+
+            
+        
+        
+            
+
+            var marker_b2baa278de3e45bf80eb6aabc977040e = L.marker(
+                [40.4154859,-80.0675491],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_0adcba9fd4054e7cb2902aa3ddf087d6 = L.popup({maxWidth: '300'});
+
+            
+                var html_7ae579adc22d42468410b15c3e88910d = $('         <div id="html_7ae579adc22d42468410b15c3e88910d"                 style="width: 100.0%; height: 100.0%;">                 Alexion&#39;s Bar &amp; Grill, Rating = 4.0</div>                 ')[0];
+                popup_0adcba9fd4054e7cb2902aa3ddf087d6.setContent(html_7ae579adc22d42468410b15c3e88910d);
+            
+
+            marker_b2baa278de3e45bf80eb6aabc977040e.bindPopup(popup_0adcba9fd4054e7cb2902aa3ddf087d6);
+
+            
+        
+        
+            
+
+            var marker_f04b5ba04b4e49b4b1ec647834fd1d7d = L.marker(
+                [40.394588,-80.0844539],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_c5aa4831cfb848d68579cd09f3b892de = L.popup({maxWidth: '300'});
+
+            
+                var html_ad3525b96e1b48889b979aa74f598cf3 = $('         <div id="html_ad3525b96e1b48889b979aa74f598cf3"                 style="width: 100.0%; height: 100.0%;">                 Flynn&#39;s Tire &amp; Auto Service, Rating = 2.5</div>                 ')[0];
+                popup_c5aa4831cfb848d68579cd09f3b892de.setContent(html_ad3525b96e1b48889b979aa74f598cf3);
+            
+
+            marker_f04b5ba04b4e49b4b1ec647834fd1d7d.bindPopup(popup_c5aa4831cfb848d68579cd09f3b892de);
+
+            
+        
+        
+            
+
+            var marker_614474295ed7445d97b0cee1710cc599 = L.marker(
+                [40.4054039,-80.0762665],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_a94c40139c0b441390b92b1059b61a38 = L.popup({maxWidth: '300'});
+
+            
+                var html_35e82ee16af94c4da03be4356013203c = $('         <div id="html_35e82ee16af94c4da03be4356013203c"                 style="width: 100.0%; height: 100.0%;">                 Forsythe Miniature Golf &amp; Snacks, Rating = 4.0</div>                 ')[0];
+                popup_a94c40139c0b441390b92b1059b61a38.setContent(html_35e82ee16af94c4da03be4356013203c);
+            
+
+            marker_614474295ed7445d97b0cee1710cc599.bindPopup(popup_a94c40139c0b441390b92b1059b61a38);
+
+            
+        
+        
+            
+
+            var marker_cc76443a4adc494f90035a3811b37f69 = L.marker(
+                [40.4062805,-80.0903905],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_14497655b0d44012bfedc53372b06cf4 = L.popup({maxWidth: '300'});
+
+            
+                var html_bb944557a70c4362b4f00f4dab7bad50 = $('         <div id="html_bb944557a70c4362b4f00f4dab7bad50"                 style="width: 100.0%; height: 100.0%;">                 Quaker State Construction, Rating = 2.5</div>                 ')[0];
+                popup_14497655b0d44012bfedc53372b06cf4.setContent(html_bb944557a70c4362b4f00f4dab7bad50);
+            
+
+            marker_cc76443a4adc494f90035a3811b37f69.bindPopup(popup_14497655b0d44012bfedc53372b06cf4);
+
+            
+        
+        
+            
+
+            var marker_fc8b8f442d044ba6830099bb61f4f327 = L.marker(
+                [40.3922071,-80.0691338],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_028cfed6e150409d91e523782502b0f9 = L.popup({maxWidth: '300'});
+
+            
+                var html_a19d0ec25cf94a6e944f77670c73e0b4 = $('         <div id="html_a19d0ec25cf94a6e944f77670c73e0b4"                 style="width: 100.0%; height: 100.0%;">                 Greentree Animal Clinic, Rating = 4.0</div>                 ')[0];
+                popup_028cfed6e150409d91e523782502b0f9.setContent(html_a19d0ec25cf94a6e944f77670c73e0b4);
+            
+
+            marker_fc8b8f442d044ba6830099bb61f4f327.bindPopup(popup_028cfed6e150409d91e523782502b0f9);
+
+            
+        
+        
+            
+
+            var marker_a1da5565348942a686f198baac54f244 = L.marker(
+                [40.4068423,-80.0858661],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_3fe0227fc9e342bab109bb9b8a4eb8d1 = L.popup({maxWidth: '300'});
+
+            
+                var html_f966a54589f241528e526d00fce92b84 = $('         <div id="html_f966a54589f241528e526d00fce92b84"                 style="width: 100.0%; height: 100.0%;">                 Carnegie Free Library, Rating = 4.5</div>                 ')[0];
+                popup_3fe0227fc9e342bab109bb9b8a4eb8d1.setContent(html_f966a54589f241528e526d00fce92b84);
+            
+
+            marker_a1da5565348942a686f198baac54f244.bindPopup(popup_3fe0227fc9e342bab109bb9b8a4eb8d1);
+
+            
+        
+        
+            
+
+            var marker_0f802082ffc343c2aed1428d25a732d2 = L.marker(
+                [40.3983526,-80.0824517],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_e4164d91ac6c440096383e8891b76507 = L.popup({maxWidth: '300'});
+
+            
+                var html_6f8769041acf4f7db8c77bed02310c53 = $('         <div id="html_6f8769041acf4f7db8c77bed02310c53"                 style="width: 100.0%; height: 100.0%;">                 Advance Auto Parts, Rating = 3.5</div>                 ')[0];
+                popup_e4164d91ac6c440096383e8891b76507.setContent(html_6f8769041acf4f7db8c77bed02310c53);
+            
+
+            marker_0f802082ffc343c2aed1428d25a732d2.bindPopup(popup_e4164d91ac6c440096383e8891b76507);
+
+            
+        
+        
+            
+
+            var marker_4dc47270510243198207a526b6043427 = L.marker(
+                [40.3875124,-80.0932152],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_487a02d57f0c47609d3b2ba44cb9c516 = L.popup({maxWidth: '300'});
+
+            
+                var html_59c36a7a20f643248d4056035ff28ed9 = $('         <div id="html_59c36a7a20f643248d4056035ff28ed9"                 style="width: 100.0%; height: 100.0%;">                 Kings Family Restaurant, Rating = 3.5</div>                 ')[0];
+                popup_487a02d57f0c47609d3b2ba44cb9c516.setContent(html_59c36a7a20f643248d4056035ff28ed9);
+            
+
+            marker_4dc47270510243198207a526b6043427.bindPopup(popup_487a02d57f0c47609d3b2ba44cb9c516);
+
+            
+        
+        
+            
+
+            var marker_34c0bbf67ea9431f9976a62516eed41b = L.marker(
+                [40.3875124,-80.0932152],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_a6fb4c3408f44d7db9b6cd89a56408d1 = L.popup({maxWidth: '300'});
+
+            
+                var html_a9191a27a4464e4eae8b018e6c4b763a = $('         <div id="html_a9191a27a4464e4eae8b018e6c4b763a"                 style="width: 100.0%; height: 100.0%;">                 Shop N&#39; Save, Rating = 4.0</div>                 ')[0];
+                popup_a6fb4c3408f44d7db9b6cd89a56408d1.setContent(html_a9191a27a4464e4eae8b018e6c4b763a);
+            
+
+            marker_34c0bbf67ea9431f9976a62516eed41b.bindPopup(popup_a6fb4c3408f44d7db9b6cd89a56408d1);
+
+            
+        
+        
+            
+
+            var marker_3405fc49d638483ba26c1358b815d7d3 = L.marker(
+                [40.4099977,-80.0833664],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_9e4d58bc3fca4415bf5fbcd9ade7a096 = L.popup({maxWidth: '300'});
+
+            
+                var html_16aaa5ae4f3646c6add1abea61ead6f8 = $('         <div id="html_16aaa5ae4f3646c6add1abea61ead6f8"                 style="width: 100.0%; height: 100.0%;">                 Knorr&#39;s Sunoco Service, Rating = 3.5</div>                 ')[0];
+                popup_9e4d58bc3fca4415bf5fbcd9ade7a096.setContent(html_16aaa5ae4f3646c6add1abea61ead6f8);
+            
+
+            marker_3405fc49d638483ba26c1358b815d7d3.bindPopup(popup_9e4d58bc3fca4415bf5fbcd9ade7a096);
+
+            
+        
+        
+            
+
+            var marker_79bd7161e20846d4b2550316187c6270 = L.marker(
+                [40.3688246817,-80.0843536574],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_901a5ca9e39544a6abcaf588b6275278 = L.popup({maxWidth: '300'});
+
+            
+                var html_34c96e92f0cf48618ed00b5e2a263e77 = $('         <div id="html_34c96e92f0cf48618ed00b5e2a263e77"                 style="width: 100.0%; height: 100.0%;">                 Rossi Tailoring &amp; Cleaners, Rating = 3.0</div>                 ')[0];
+                popup_901a5ca9e39544a6abcaf588b6275278.setContent(html_34c96e92f0cf48618ed00b5e2a263e77);
+            
+
+            marker_79bd7161e20846d4b2550316187c6270.bindPopup(popup_901a5ca9e39544a6abcaf588b6275278);
+
+            
+        
+        
+            
+
+            var marker_adc642efe56d4c25ae3221d752dac1cf = L.marker(
+                [40.388284,-80.089241],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_d44cba843ed94523a8445e4035ffcadc = L.popup({maxWidth: '300'});
+
+            
+                var html_cb8fb6017cab45238e08d4bc9d730ed0 = $('         <div id="html_cb8fb6017cab45238e08d4bc9d730ed0"                 style="width: 100.0%; height: 100.0%;">                 Heidelberg B P, Rating = 3.0</div>                 ')[0];
+                popup_d44cba843ed94523a8445e4035ffcadc.setContent(html_cb8fb6017cab45238e08d4bc9d730ed0);
+            
+
+            marker_adc642efe56d4c25ae3221d752dac1cf.bindPopup(popup_d44cba843ed94523a8445e4035ffcadc);
+
+            
+        
+        
+            
+
+            var marker_17e256cb52374e5aad87725355fc84a5 = L.marker(
+                [40.3964688,-80.0849416],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_f38d30b33b964472a4dfc29dfc177e50 = L.popup({maxWidth: '300'});
+
+            
+                var html_615920e2cefa4d82a642e1f10b1c48a9 = $('         <div id="html_615920e2cefa4d82a642e1f10b1c48a9"                 style="width: 100.0%; height: 100.0%;">                 Rocky&#39;s Lounge, Rating = 4.0</div>                 ')[0];
+                popup_f38d30b33b964472a4dfc29dfc177e50.setContent(html_615920e2cefa4d82a642e1f10b1c48a9);
+            
+
+            marker_17e256cb52374e5aad87725355fc84a5.bindPopup(popup_f38d30b33b964472a4dfc29dfc177e50);
+
+            
+        
+        
+            
+
+            var marker_c4f9fa40308c4b5fa465999c37b5932e = L.marker(
+                [40.3980013,-80.0834577],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_b779046e82d64b00befe8454deb111eb = L.popup({maxWidth: '300'});
+
+            
+                var html_17b7376c7a9b43b3bb6ab4905915e01c = $('         <div id="html_17b7376c7a9b43b3bb6ab4905915e01c"                 style="width: 100.0%; height: 100.0%;">                 Gab &amp; Eat, Rating = 4.5</div>                 ')[0];
+                popup_b779046e82d64b00befe8454deb111eb.setContent(html_17b7376c7a9b43b3bb6ab4905915e01c);
+            
+
+            marker_c4f9fa40308c4b5fa465999c37b5932e.bindPopup(popup_b779046e82d64b00befe8454deb111eb);
+
+            
+        
+        
+            
+
+            var marker_b1f9de3ccbbb45c780491c62531c1d60 = L.marker(
+                [40.404638,-80.089985],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_0f7fb9f8ac4e4805a8871592af2d10f7 = L.popup({maxWidth: '300'});
+
+            
+                var html_0992b04b7d2b408698fff18b6f1244a9 = $('         <div id="html_0992b04b7d2b408698fff18b6f1244a9"                 style="width: 100.0%; height: 100.0%;">                 Barb&#39;s Country Junction Cafe, Rating = 4.0</div>                 ')[0];
+                popup_0f7fb9f8ac4e4805a8871592af2d10f7.setContent(html_0992b04b7d2b408698fff18b6f1244a9);
+            
+
+            marker_b1f9de3ccbbb45c780491c62531c1d60.bindPopup(popup_0f7fb9f8ac4e4805a8871592af2d10f7);
+
+            
+        
+        
+            
+
+            var marker_5d95cef2b36042e5afa6389da8221598 = L.marker(
+                [40.417419,-80.088557],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_39263ac73640450abd9762c4b8f9e223 = L.popup({maxWidth: '300'});
+
+            
+                var html_4c7867f6f0524fa88cf374557bf7d706 = $('         <div id="html_4c7867f6f0524fa88cf374557bf7d706"                 style="width: 100.0%; height: 100.0%;">                 Extended Stay America - Pittsburgh - Carnegie, Rating = 3.5</div>                 ')[0];
+                popup_39263ac73640450abd9762c4b8f9e223.setContent(html_4c7867f6f0524fa88cf374557bf7d706);
+            
+
+            marker_5d95cef2b36042e5afa6389da8221598.bindPopup(popup_39263ac73640450abd9762c4b8f9e223);
+
+            
+        
+        
+            
+
+            var marker_90efa39a107a4da897ea0b58ee2bdf1c = L.marker(
+                [40.40867,-80.085279],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_f1da4a806e624292989ee63f255145d0 = L.popup({maxWidth: '300'});
+
+            
+                var html_3bfa875702de47dd934b927c0ffb6ca6 = $('         <div id="html_3bfa875702de47dd934b927c0ffb6ca6"                 style="width: 100.0%; height: 100.0%;">                 Paddy&#39;s Pour House, Rating = 3.5</div>                 ')[0];
+                popup_f1da4a806e624292989ee63f255145d0.setContent(html_3bfa875702de47dd934b927c0ffb6ca6);
+            
+
+            marker_90efa39a107a4da897ea0b58ee2bdf1c.bindPopup(popup_f1da4a806e624292989ee63f255145d0);
+
+            
+        
+        
+            
+
+            var marker_963dc940e8d445aebadb80861bf7656c = L.marker(
+                [40.408832,-80.0849338],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_eb404f6d182e4e289e5226404864e1e2 = L.popup({maxWidth: '300'});
+
+            
+                var html_ef2647cbac7342bab9301cc67e62bc8a = $('         <div id="html_ef2647cbac7342bab9301cc67e62bc8a"                 style="width: 100.0%; height: 100.0%;">                 Porto Fino Pizzaria &amp; Gyro, Rating = 2.5</div>                 ')[0];
+                popup_eb404f6d182e4e289e5226404864e1e2.setContent(html_ef2647cbac7342bab9301cc67e62bc8a);
+            
+
+            marker_963dc940e8d445aebadb80861bf7656c.bindPopup(popup_eb404f6d182e4e289e5226404864e1e2);
+
+            
+        
+        
+            
+
+            var marker_45db836a027e4cc1987f8208749260b1 = L.marker(
+                [40.4068712,-80.0876046],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_c211f4245fc34d7db2dc87545c0c6ab2 = L.popup({maxWidth: '300'});
+
+            
+                var html_cf1da3d8385c41af943eb63d685bc1cf = $('         <div id="html_cf1da3d8385c41af943eb63d685bc1cf"                 style="width: 100.0%; height: 100.0%;">                 Alteration World, Rating = 4.5</div>                 ')[0];
+                popup_c211f4245fc34d7db2dc87545c0c6ab2.setContent(html_cf1da3d8385c41af943eb63d685bc1cf);
+            
+
+            marker_45db836a027e4cc1987f8208749260b1.bindPopup(popup_c211f4245fc34d7db2dc87545c0c6ab2);
+
+            
+        
+        
+            
+
+            var marker_8b3c83091cb44d57a1534a8f7aec4352 = L.marker(
+                [40.3868915,-80.0937037],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_55ee0665d0104bc6bafc32cb5d925e2e = L.popup({maxWidth: '300'});
+
+            
+                var html_07c99c81e5584b07b166715f2938fd27 = $('         <div id="html_07c99c81e5584b07b166715f2938fd27"                 style="width: 100.0%; height: 100.0%;">                 Long John Silver&#39;s, Rating = 3.0</div>                 ')[0];
+                popup_55ee0665d0104bc6bafc32cb5d925e2e.setContent(html_07c99c81e5584b07b166715f2938fd27);
+            
+
+            marker_8b3c83091cb44d57a1534a8f7aec4352.bindPopup(popup_55ee0665d0104bc6bafc32cb5d925e2e);
+
+            
+        
+        
+            
+
+            var marker_3b037ae5e1ae4c7cb16a7bad6996d26c = L.marker(
+                [40.39076,-80.078657],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_322405d85f8a44a394aeffcf87d573b6 = L.popup({maxWidth: '300'});
+
+            
+                var html_20f7a2063c2a4ae6a4bddef579d8c962 = $('         <div id="html_20f7a2063c2a4ae6a4bddef579d8c962"                 style="width: 100.0%; height: 100.0%;">                 Weinberg Lisa, DMD, Rating = 2.5</div>                 ')[0];
+                popup_322405d85f8a44a394aeffcf87d573b6.setContent(html_20f7a2063c2a4ae6a4bddef579d8c962);
+            
+
+            marker_3b037ae5e1ae4c7cb16a7bad6996d26c.bindPopup(popup_322405d85f8a44a394aeffcf87d573b6);
+
+            
+        
+        
+            
+
+            var marker_b000afc2782c436498bd1a4806b38a27 = L.marker(
+                [40.4083473,-80.0849615],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_14c837bc38814bef895e67dca7f96762 = L.popup({maxWidth: '300'});
+
+            
+                var html_77216472e9ee409783c18d875bc8752b = $('         <div id="html_77216472e9ee409783c18d875bc8752b"                 style="width: 100.0%; height: 100.0%;">                 Don Don Chinese Restaurant, Rating = 2.5</div>                 ')[0];
+                popup_14c837bc38814bef895e67dca7f96762.setContent(html_77216472e9ee409783c18d875bc8752b);
+            
+
+            marker_b000afc2782c436498bd1a4806b38a27.bindPopup(popup_14c837bc38814bef895e67dca7f96762);
+
+            
+        
+        
+            
+
+            var marker_aa5ed8d6e1b646c1ad4bf60d4c8446e2 = L.marker(
+                [40.3905694,-80.0878979],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_7c9eac99f2404416b5e029400c92aecf = L.popup({maxWidth: '300'});
+
+            
+                var html_5fd847c028f642fd857cd572ed865abc = $('         <div id="html_5fd847c028f642fd857cd572ed865abc"                 style="width: 100.0%; height: 100.0%;">                 Chartiers Animal Hospital, Rating = 3.5</div>                 ')[0];
+                popup_7c9eac99f2404416b5e029400c92aecf.setContent(html_5fd847c028f642fd857cd572ed865abc);
+            
+
+            marker_aa5ed8d6e1b646c1ad4bf60d4c8446e2.bindPopup(popup_7c9eac99f2404416b5e029400c92aecf);
+
+            
+        
+        
+            
+
+            var marker_f1aec95599a449399adde379d9742354 = L.marker(
+                [40.39114,-80.073788],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_7b85a3c0d27c4bdd8df0d10da5667791 = L.popup({maxWidth: '300'});
+
+            
+                var html_d38af8af9d6a4d5fa6f3efff21bb93ad = $('         <div id="html_d38af8af9d6a4d5fa6f3efff21bb93ad"                 style="width: 100.0%; height: 100.0%;">                 Denny&#39;s, Rating = 3.5</div>                 ')[0];
+                popup_7b85a3c0d27c4bdd8df0d10da5667791.setContent(html_d38af8af9d6a4d5fa6f3efff21bb93ad);
+            
+
+            marker_f1aec95599a449399adde379d9742354.bindPopup(popup_7b85a3c0d27c4bdd8df0d10da5667791);
+
+            
+        
+        
+            
+
+            var marker_759f34f5bf51433db87c084877ddfc96 = L.marker(
+                [40.394305,-80.060154],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_10b74928c359411ca1a3e5203e097f4a = L.popup({maxWidth: '300'});
+
+            
+                var html_9ae0d250a0aa46d8a4c558370403bcf2 = $('         <div id="html_9ae0d250a0aa46d8a4c558370403bcf2"                 style="width: 100.0%; height: 100.0%;">                 Amerifit, Rating = 3.0</div>                 ')[0];
+                popup_10b74928c359411ca1a3e5203e097f4a.setContent(html_9ae0d250a0aa46d8a4c558370403bcf2);
+            
+
+            marker_759f34f5bf51433db87c084877ddfc96.bindPopup(popup_10b74928c359411ca1a3e5203e097f4a);
+
+            
+        
+        
+            
+
+            var marker_e56291f574944a359b2b13329b7036bc = L.marker(
+                [40.4081527,-80.085153],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_a3f2b38ce6134e6297e139b230c118ff = L.popup({maxWidth: '300'});
+
+            
+                var html_1e095e28166c4c85a416ff7b77dc4654 = $('         <div id="html_1e095e28166c4c85a416ff7b77dc4654"                 style="width: 100.0%; height: 100.0%;">                 Papa J&#39;s, Rating = 3.5</div>                 ')[0];
+                popup_a3f2b38ce6134e6297e139b230c118ff.setContent(html_1e095e28166c4c85a416ff7b77dc4654);
+            
+
+            marker_e56291f574944a359b2b13329b7036bc.bindPopup(popup_a3f2b38ce6134e6297e139b230c118ff);
+
+            
+        
+        
+            
+
+            var marker_6909a5dc9a4c4a0c9aa2ec6073f531c2 = L.marker(
+                [40.495167,-79.958717],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_8ea0a45f49c7427fa0d9c46c6e748c10 = L.popup({maxWidth: '300'});
+
+            
+                var html_4107e10688624a3f87d33e91c0785f52 = $('         <div id="html_4107e10688624a3f87d33e91c0785f52"                 style="width: 100.0%; height: 100.0%;">                 Boston Market, Rating = 2.5</div>                 ')[0];
+                popup_8ea0a45f49c7427fa0d9c46c6e748c10.setContent(html_4107e10688624a3f87d33e91c0785f52);
+            
+
+            marker_6909a5dc9a4c4a0c9aa2ec6073f531c2.bindPopup(popup_8ea0a45f49c7427fa0d9c46c6e748c10);
+
+            
+        
+        
+            
+
+            var marker_2db64ca2881e40249b9ca9f22c117a4c = L.marker(
+                [40.4704573376,-80.0889587402],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_a686a74611b84aca83dea3df216b8c5b = L.popup({maxWidth: '300'});
+
+            
+                var html_31c2d435fea649aeb642fd91ce4b5a0e = $('         <div id="html_31c2d435fea649aeb642fd91ce4b5a0e"                 style="width: 100.0%; height: 100.0%;">                 Emmert Dental Associates, Rating = 1.5</div>                 ')[0];
+                popup_a686a74611b84aca83dea3df216b8c5b.setContent(html_31c2d435fea649aeb642fd91ce4b5a0e);
+            
+
+            marker_2db64ca2881e40249b9ca9f22c117a4c.bindPopup(popup_a686a74611b84aca83dea3df216b8c5b);
+
+            
+        
+        
+            
+
+            var marker_1b0d69d75b5240c4908be700d53d32ad = L.marker(
+                [40.4067047,-79.9105266],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_e1618454ce964f92895229ab2be88847 = L.popup({maxWidth: '300'});
+
+            
+                var html_e87b37a7e6744ceeb15bc429585400ab = $('         <div id="html_e87b37a7e6744ceeb15bc429585400ab"                 style="width: 100.0%; height: 100.0%;">                 Homestead Capri Pizza, Rating = 2.0</div>                 ')[0];
+                popup_e1618454ce964f92895229ab2be88847.setContent(html_e87b37a7e6744ceeb15bc429585400ab);
+            
+
+            marker_1b0d69d75b5240c4908be700d53d32ad.bindPopup(popup_e1618454ce964f92895229ab2be88847);
+
+            
+        
+        
+            
+
+            var marker_7d7debf773644afeb0c3c71edfa7f318 = L.marker(
+                [40.412012,-79.9098858],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_d6c9c023190a47bf82f152893fb05a6c = L.popup({maxWidth: '300'});
+
+            
+                var html_4a75e76438224b2e8d4850d240bf17a3 = $('         <div id="html_4a75e76438224b2e8d4850d240bf17a3"                 style="width: 100.0%; height: 100.0%;">                 McDonald&#39;s, Rating = 2.0</div>                 ')[0];
+                popup_d6c9c023190a47bf82f152893fb05a6c.setContent(html_4a75e76438224b2e8d4850d240bf17a3);
+            
+
+            marker_7d7debf773644afeb0c3c71edfa7f318.bindPopup(popup_d6c9c023190a47bf82f152893fb05a6c);
+
+            
+        
+        
+            
+
+            var marker_d4dbf53f43ad400c9a4dd45e9103da6e = L.marker(
+                [40.407091,-79.916958],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_4acc3dd2703b41239621b59cbe1604ec = L.popup({maxWidth: '300'});
+
+            
+                var html_0077b320f63047fb99c6f778fca854fb = $('         <div id="html_0077b320f63047fb99c6f778fca854fb"                 style="width: 100.0%; height: 100.0%;">                 Starbucks, Rating = 3.5</div>                 ')[0];
+                popup_4acc3dd2703b41239621b59cbe1604ec.setContent(html_0077b320f63047fb99c6f778fca854fb);
+            
+
+            marker_d4dbf53f43ad400c9a4dd45e9103da6e.bindPopup(popup_4acc3dd2703b41239621b59cbe1604ec);
+
+            
+        
+        
+            
+
+            var marker_f71e326a5dd74de7a2415d306e16ce85 = L.marker(
+                [40.3846329,-79.9036345],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_8a78e49e3dca4ed88d952f580eee0eaf = L.popup({maxWidth: '300'});
+
+            
+                var html_c44df12e9fad47a9bb4bb69a7c3a5ac9 = $('         <div id="html_c44df12e9fad47a9bb4bb69a7c3a5ac9"                 style="width: 100.0%; height: 100.0%;">                 Randy&#39;s Beer Barrel Pub, Rating = 2.5</div>                 ')[0];
+                popup_8a78e49e3dca4ed88d952f580eee0eaf.setContent(html_c44df12e9fad47a9bb4bb69a7c3a5ac9);
+            
+
+            marker_f71e326a5dd74de7a2415d306e16ce85.bindPopup(popup_8a78e49e3dca4ed88d952f580eee0eaf);
+
+            
+        
+        
+            
+
+            var marker_7fc783ad5e9f41508576b9f5ccdaf9b5 = L.marker(
+                [40.3736775,-79.8737336],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_28308e5046194015aaa630c6684686f6 = L.popup({maxWidth: '300'});
+
+            
+                var html_f8fe21e584e8481d81df2c9e9ccb5554 = $('         <div id="html_f8fe21e584e8481d81df2c9e9ccb5554"                 style="width: 100.0%; height: 100.0%;">                 Cat Around Town, Rating = 5.0</div>                 ')[0];
+                popup_28308e5046194015aaa630c6684686f6.setContent(html_f8fe21e584e8481d81df2c9e9ccb5554);
+            
+
+            marker_7fc783ad5e9f41508576b9f5ccdaf9b5.bindPopup(popup_28308e5046194015aaa630c6684686f6);
+
+            
+        
+        
+            
+
+            var marker_aff526edd507464b944c78c5134204df = L.marker(
+                [40.4140637,-79.9037778],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_b9cb232949364b61ada4c18210481dfb = L.popup({maxWidth: '300'});
+
+            
+                var html_cf74088a90e2468298a6b71a54e85103 = $('         <div id="html_cf74088a90e2468298a6b71a54e85103"                 style="width: 100.0%; height: 100.0%;">                 Michaels, Rating = 3.0</div>                 ')[0];
+                popup_b9cb232949364b61ada4c18210481dfb.setContent(html_cf74088a90e2468298a6b71a54e85103);
+            
+
+            marker_aff526edd507464b944c78c5134204df.bindPopup(popup_b9cb232949364b61ada4c18210481dfb);
+
+            
+        
+        
+            
+
+            var marker_c18f7bc581424852a2206e64c9e1efaa = L.marker(
+                [40.4075854,-79.9163491],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_7729ffa55e314d3594af1f1d419c02fb = L.popup({maxWidth: '300'});
+
+            
+                var html_d04def57704b4786825c6d072d0857fb = $('         <div id="html_d04def57704b4786825c6d072d0857fb"                 style="width: 100.0%; height: 100.0%;">                 Yankee Candle Co., Rating = 4.5</div>                 ')[0];
+                popup_7729ffa55e314d3594af1f1d419c02fb.setContent(html_d04def57704b4786825c6d072d0857fb);
+            
+
+            marker_c18f7bc581424852a2206e64c9e1efaa.bindPopup(popup_7729ffa55e314d3594af1f1d419c02fb);
+
+            
+        
+        
+            
+
+            var marker_13bd22a3391543a8951f2c539a0500b6 = L.marker(
+                [40.413496,-79.9044562],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_ee64cd76c33c4899b637d40996098f98 = L.popup({maxWidth: '300'});
+
+            
+                var html_c6d5d05889a14d848e283c5a62cdd07f = $('         <div id="html_c6d5d05889a14d848e283c5a62cdd07f"                 style="width: 100.0%; height: 100.0%;">                 Steak &#39;n Shake, Rating = 2.0</div>                 ')[0];
+                popup_ee64cd76c33c4899b637d40996098f98.setContent(html_c6d5d05889a14d848e283c5a62cdd07f);
+            
+
+            marker_13bd22a3391543a8951f2c539a0500b6.bindPopup(popup_ee64cd76c33c4899b637d40996098f98);
+
+            
+        
+        
+            
+
+            var marker_e8cfac62c07146509195b41fffb67224 = L.marker(
+                [40.4116978,-79.9124082],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_d8b125c9a5ed487395aa0e2cd18e72d0 = L.popup({maxWidth: '300'});
+
+            
+                var html_326e9a6925a44c8a81922910037d9c7f = $('         <div id="html_326e9a6925a44c8a81922910037d9c7f"                 style="width: 100.0%; height: 100.0%;">                 Filene&#39;s Basement, Rating = 3.5</div>                 ')[0];
+                popup_d8b125c9a5ed487395aa0e2cd18e72d0.setContent(html_326e9a6925a44c8a81922910037d9c7f);
+            
+
+            marker_e8cfac62c07146509195b41fffb67224.bindPopup(popup_d8b125c9a5ed487395aa0e2cd18e72d0);
+
+            
+        
+        
+            
+
+            var marker_10e68a46083d48fcb3d39f03ce312ffc = L.marker(
+                [40.4094353,-79.9152619],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_2cd5d64fdd9e4b38b1d12a66b1e430d4 = L.popup({maxWidth: '300'});
+
+            
+                var html_6e4c1908ae3247648d19f8e9a96c115a = $('         <div id="html_6e4c1908ae3247648d19f8e9a96c115a"                 style="width: 100.0%; height: 100.0%;">                 Sing Sing, Rating = 3.5</div>                 ')[0];
+                popup_2cd5d64fdd9e4b38b1d12a66b1e430d4.setContent(html_6e4c1908ae3247648d19f8e9a96c115a);
+            
+
+            marker_10e68a46083d48fcb3d39f03ce312ffc.bindPopup(popup_2cd5d64fdd9e4b38b1d12a66b1e430d4);
+
+            
+        
+        
+            
+
+            var marker_2bf2aa0add424ae8b1b836b574c1d1d7 = L.marker(
+                [40.40682,-79.912788],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_23b6851bad5f4466a0a3b9d221b0674f = L.popup({maxWidth: '300'});
+
+            
+                var html_43edee2e02bc4327b72053577097232d = $('         <div id="html_43edee2e02bc4327b72053577097232d"                 style="width: 100.0%; height: 100.0%;">                 Joe Dilorio&#39;s Auto Body Shop, Rating = 4.5</div>                 ')[0];
+                popup_23b6851bad5f4466a0a3b9d221b0674f.setContent(html_43edee2e02bc4327b72053577097232d);
+            
+
+            marker_2bf2aa0add424ae8b1b836b574c1d1d7.bindPopup(popup_23b6851bad5f4466a0a3b9d221b0674f);
+
+            
+        
+        
+            
+
+            var marker_be1efd3fbb98470bbe401e8748ad189c = L.marker(
+                [40.4126484,-79.9016982],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_9c3ec4dd1e8b45b8b90cd10e5279125d = L.popup({maxWidth: '300'});
+
+            
+                var html_6a270082bdcd4f65a27357de868de955 = $('         <div id="html_6a270082bdcd4f65a27357de868de955"                 style="width: 100.0%; height: 100.0%;">                 Lowe&#39;s Home Improvement, Rating = 3.0</div>                 ')[0];
+                popup_9c3ec4dd1e8b45b8b90cd10e5279125d.setContent(html_6a270082bdcd4f65a27357de868de955);
+            
+
+            marker_be1efd3fbb98470bbe401e8748ad189c.bindPopup(popup_9c3ec4dd1e8b45b8b90cd10e5279125d);
+
+            
+        
+        
+            
+
+            var marker_736b76d512444895821c360488b64646 = L.marker(
+                [40.405311,-79.912595],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_551a4d3305fb4e27a49c0814e3101640 = L.popup({maxWidth: '300'});
+
+            
+                var html_3b4813c545d9457691bf7256e09bd137 = $('         <div id="html_3b4813c545d9457691bf7256e09bd137"                 style="width: 100.0%; height: 100.0%;">                 Duke&#39;s Upper Deck Cafe, Rating = 3.5</div>                 ')[0];
+                popup_551a4d3305fb4e27a49c0814e3101640.setContent(html_3b4813c545d9457691bf7256e09bd137);
+            
+
+            marker_736b76d512444895821c360488b64646.bindPopup(popup_551a4d3305fb4e27a49c0814e3101640);
+
+            
+        
+        
+            
+
+            var marker_d10dbf89c19048b38207acbc51e3134c = L.marker(
+                [40.4092932,-79.9141865],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_735b3c96a40c443dbe5091b3ec88da6e = L.popup({maxWidth: '300'});
+
+            
+                var html_b7496700a7c741e89e889e44869ade80 = $('         <div id="html_b7496700a7c741e89e889e44869ade80"                 style="width: 100.0%; height: 100.0%;">                 Dave &amp; Buster&#39;s, Rating = 2.5</div>                 ')[0];
+                popup_735b3c96a40c443dbe5091b3ec88da6e.setContent(html_b7496700a7c741e89e889e44869ade80);
+            
+
+            marker_d10dbf89c19048b38207acbc51e3134c.bindPopup(popup_735b3c96a40c443dbe5091b3ec88da6e);
+
+            
+        
+        
+            
+
+            var marker_e6d94ac628694b9aa7bc3fde0a05737f = L.marker(
+                [40.413831,-79.9075019],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_e2ad55aa90654ad99f15da1f8d424469 = L.popup({maxWidth: '300'});
+
+            
+                var html_86229a996fd94675a2129ccd7949d7ee = $('         <div id="html_86229a996fd94675a2129ccd7949d7ee"                 style="width: 100.0%; height: 100.0%;">                 South Hills Family Medicine, Rating = 1.5</div>                 ')[0];
+                popup_e2ad55aa90654ad99f15da1f8d424469.setContent(html_86229a996fd94675a2129ccd7949d7ee);
+            
+
+            marker_e6d94ac628694b9aa7bc3fde0a05737f.bindPopup(popup_e2ad55aa90654ad99f15da1f8d424469);
+
+            
+        
+        
+            
+
+            var marker_3d2b8c15a0cc4d8f8d3ab473385e10cd = L.marker(
+                [40.4097098,-79.9017997],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_604f5d92c5c4488ebc8ddcb8ebb86a87 = L.popup({maxWidth: '300'});
+
+            
+                var html_8026b07651a54523b7df5d05de56744b = $('         <div id="html_8026b07651a54523b7df5d05de56744b"                 style="width: 100.0%; height: 100.0%;">                 Wendy&#39;s, Rating = 3.0</div>                 ')[0];
+                popup_604f5d92c5c4488ebc8ddcb8ebb86a87.setContent(html_8026b07651a54523b7df5d05de56744b);
+            
+
+            marker_3d2b8c15a0cc4d8f8d3ab473385e10cd.bindPopup(popup_604f5d92c5c4488ebc8ddcb8ebb86a87);
+
+            
+        
+        
+            
+
+            var marker_97bb3fc51dd2472781553f6ce1ce6dcd = L.marker(
+                [40.39877,-79.913802],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_fd9d79129fe74eb8aa35282fbf56363f);
+            
+        
+            
+            var popup_e6ef4bdb53294e1aab9c4fb04233e132 = L.popup({maxWidth: '300'});
+
+            
+                var html_78db6dca7d80459d8f19e29a8ef58ca5 = $('         <div id="html_78db6dca7d80459d8f19e29a8ef58ca5"                 style="width: 100.0%; height: 100.0%;">                 RDN Plumbing, Rating = 4.5</div>                 ')[0];
+                popup_e6ef4bdb53294e1aab9c4fb04233e132.setContent(html_78db6dca7d80459d8f19e29a8ef58ca5);
+            
+
+            marker_97bb3fc51dd2472781553f6ce1ce6dcd.bindPopup(popup_e6ef4bdb53294e1aab9c4fb04233e132);
+
+            
+        
+        
+        
+        </script>
+        
