@@ -83,7 +83,9 @@ def get_nested_value(d, key):
     if base_key not in d:
         return None
     sub_dict = d[base_key]
-    return get_nested_value(sub_dict, sub_key)
+    
+    if sub_dict is not None:
+        return get_nested_value(sub_dict, sub_key)
 
 def get_row(line_contents, column_names):
     """Return a csv compatible row given column names and a dict."""
